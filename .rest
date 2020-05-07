@@ -1,0 +1,60 @@
+GET http://localhost:9000
+
+###
+
+POST http://localhost:9000/api/user
+Content-Type: application/json
+
+{
+    "name": "Rex post",
+    "mail": "abc@abc.com"
+}
+
+###
+
+PUT http://localhost:9000/api/user
+Content-Type: application/json
+
+{
+    "name": "Rex put",
+    "mail": "def2@def2.com"
+}
+
+###
+
+POST http://localhost:9000/api/entry
+Content-Type: application/json
+
+{
+    "title": "title abc",
+    "imgUrl": "http://imgur.com/pic1"
+}
+
+###
+
+PUT http://localhost:9000/api/entry
+Content-Type: application/json
+
+{
+    "title": "title abc",
+    "imgUrl": "http://imgur.com/pic2"
+}
+
+###
+
+POST http://localhost:9000/api/user/login
+Content-Type: application/json
+
+{
+    "name": "Rex POST",
+    "password": "123456"
+}
+
+###
+
+DELETE  http://localhost:9000/api/user/login
+Content-Type: application/json
+
+{
+    "name": "Rex DELETE"
+}
