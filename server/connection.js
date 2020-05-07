@@ -23,6 +23,6 @@ async function addDefaultUsers(){
             console.log("Default user admin added to database.")
         })
     } else {
-        console.log("User 'admin' is in database.")
+        // console.log("User 'admin' is in database.")
     }
 }

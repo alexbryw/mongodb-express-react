@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 const User = require('../models/User.model')
 
 //Get user.
@@ -9,15 +10,21 @@ router.get('/api/user', function (req, res) {
 })
 
 //Add user.
-router.post('/api/user', function (req, res) {
-    //TODO add bcryp password.
-    let user = new User({username: req.body.username, password: req.body.password, admin: false})
-    console.log(user)
+router.post('/api/user', async function (req, res) {
+    let cryptPassword
+    if(!req.body.password || req.body.password.length < 5){
+        return res.status(400).send({msg: "Password is to short, 6 or longer"})
+    } else {
+        cryptPassword = await bcrypt.hash(req.body.password, 10)
+    }
+
+    let user = new User({username: req.body.username, password: cryptPassword, admin: false})
+    // console.log(user)
     try {
         user.save(function (err, user) {
             if(err){//db error, duplicate name or bad password.
                 res.status(400).send(
-                {err: err.message})
+                {msg: err.message})
             }
             res.status(201).json(user)//201 OK created and send back new user.
         })
