@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/lab3', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/lab3', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 
 let db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
