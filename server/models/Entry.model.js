@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const entrySchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     username: {
         type:String,
         required: true
