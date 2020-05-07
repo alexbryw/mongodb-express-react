@@ -12,7 +12,25 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + file.originalname)
     }
 })
-const upload = multer({storage: storage})
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'image/jpeg' || file.mimetype == 'image/png'){
+        //accept
+        cb(null, true)
+    } else {
+        //reject file
+        cb(new Error('To big or wrong format'), false)
+    }
+
+}
+
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    }, 
+    fileFilter: fileFilter
+    })
 
 //Get all entries.
 router.get('/api/entry', function (req, res) {
