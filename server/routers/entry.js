@@ -33,9 +33,67 @@ const upload = multer({
     })
 
 //Get all entries.
-router.get('/api/entry', function (req, res) {
-    res.json({msg:"from GET /api/entry"})
+router.get('/api/entry', (req, res, next) => {
+    //res.json({msg:"from GET /api/entry"})
+    Entry.find()
+    .select('_id username title text image')
+    .exec()
+    .then(docs => {
+        console.log('from getting all the entries', docs)
+        const response = {
+            count: docs.length,
+            entries: docs.map(doc => {
+                return {
+                    _id: doc._id,
+                    username: doc.username,
+                    title: doc.title,
+                    image: doc.image,
+                    text: doc.text,
+                    request: {
+                        type: "GET",
+                        url: "http://localhost:9000/api/entry/" + doc._id
+                    }
+                }
+            })
+        }
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(404).json({
+            message: 'No entries found'
+        })
+    })
 })
+
+//Get entry by id
+
+router.get('/api/entry/:_id', (req, res, next) => {
+    const id = req.params._id
+
+    Entry.findById(id)
+    .select('username title text _id image')
+    .exec()
+    .then(doc => {
+        console.log('From database: ', doc)
+        if(doc) {
+            res.status(200).json({
+                entry: doc,
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:9000/api/entry'
+                }
+            })
+        } else {
+            res.status(404).json({message: ' Did not find specific entry '})
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: err })
+    })
+})
+
 
 //Add entry.
 router.post('/api/entry', upload.single('image'), function (req, res, next) {
@@ -53,7 +111,7 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
         console.log(result)
         res.status(201).json({
             createdEntry: {
-                _id: result.id,
+                _id: result._id,
                 username: result.username,
                 title: result.title,
                 request: {
@@ -74,12 +132,21 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
 })
 
 //Update entry.
-router.put('/api/entry', function (req, res) {
+router.put('/api/entry/:id', function (req, res) {
+/*     const entry = Entry.find(ent => ent._id === parseInt(req.params._id))
+
+    if(!entry){
+        return res.status(404).send("Can't find entry")
+    }
+    entry.title = req.body.title
+    entry.image = req.file.path
+    entry.text = req.body.text */
     res.json({msg:"from PUT /api/entry"})
 })
 
 //Delete entry.
 router.delete('/api/entry', function (req, res) {
+    //const {_id} = req.body
     res.json({msg:"from DELETE /api/entry"})
 })
 
