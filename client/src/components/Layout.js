@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Entries from './Entries';
-import User from './User';
+import Entries from './entry/Entries';
+import User from './user/User';
 import AddEntry from './AddEntry';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 

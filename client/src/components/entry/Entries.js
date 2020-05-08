@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import EntryCard from './EntryCard';
-import entryArray from '../testArray/entryArray';
+import entryArray from '../../testArray/entryArray';
 
 
 export default class Enties extends Component {
