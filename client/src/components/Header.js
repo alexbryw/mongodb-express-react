@@ -1,10 +1,11 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import { Link } from 'react-router-dom'
 
 export default function Header() {
     let headerSize = {   
@@ -27,10 +28,21 @@ export default function Header() {
                 alignItems="center"
                 style={headerStyle}
             >
-                <Typography variant="h5" color="primary">MEMEAPP</Typography>
-                <IconButton color="primary">
-                    <AccountCircleIcon />
-                </IconButton>
+            <Link to="/">
+                <img src={require('../assets/logo.png')} alt="logo" style={{height:"3em"}}/>
+            </Link>
+            <div>
+                <Link to="/addentry">
+                    <IconButton color="primary">
+                        <ControlPointIcon />
+                    </IconButton>
+                </Link>
+                <Link to="/user">
+                    <IconButton color="primary">
+                        <AccountCircleIcon />
+                    </IconButton>
+                </Link>
+            </div>
             </Grid>
         </Container>
     )
