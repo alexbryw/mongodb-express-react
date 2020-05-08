@@ -23,6 +23,11 @@ const entrySchema = new Schema({
     }
 })
 
+const imageUrl = entrySchema.virtual('imageUrl')
+imageUrl.get(function(value, virtual, doc){
+    return 'http://localhost:9000/' + doc.image
+})
+
 const Entry = mongoose.model('Entry', entrySchema)
 
 module.exports = Entry

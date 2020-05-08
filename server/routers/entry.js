@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require("mongoose");
 let Entry = require('../models/Entry.model')
+const imageUrl = require('../models/Entry.model')
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -68,8 +69,8 @@ router.get('/api/entry', (req, res, next) => {
 
 //Get entry by id
 
-router.get('/api/entry/:_id', (req, res, next) => {
-    const id = req.params._id
+router.get('/api/entry/:id', (req, res, next) => {
+    const id = req.params.id
 
     Entry.findById(id)
     .select('username title text _id image')
@@ -97,7 +98,6 @@ router.get('/api/entry/:_id', (req, res, next) => {
 
 //Add entry.
 router.post('/api/entry', upload.single('image'), function (req, res, next) {
-    console.log(req.file)
     //res.json({msg:"from POST /api/entry"})
     const entry = new Entry({
         _id: new  mongoose.Types.ObjectId(),
@@ -116,7 +116,7 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
                 title: result.title,
                 request: {
                     type: 'GET',
-                    url: "http://localhost:3000/entry/" + result._id
+                    url: "http://localhost:9000/api/entry/" + result._id
                 },
                 text: result.text,
             }
@@ -132,16 +132,48 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
 })
 
 //Update entry.
-router.put('/api/entry/:id', function (req, res) {
-/*     const entry = Entry.find(ent => ent._id === parseInt(req.params._id))
-
-    if(!entry){
-        return res.status(404).send("Can't find entry")
+router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
+    console.log('This is the body :', req.body)
+    try{
+        const id = req.params.id
+        const entry = await Entry.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
+        res.json({
+            old: entry,
+            new: req.body
+        })
+    } catch(err){
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
     }
-    entry.title = req.body.title
-    entry.image = req.file.path
-    entry.text = req.body.text */
-    res.json({msg:"from PUT /api/entry"})
+    /* const id = req.params.id
+    const updates = req.body
+    console.log('this is body', req.body)
+    Entry.findByIdAndUpdate(id, 
+        updates
+    )
+    .then(result => {
+        console.log('this is result:', result)
+        res.status(201).json({
+            updatedEntry: {
+                _id: result._id,
+                username: result.username,
+                title: result.title,
+                request: {
+                    type: 'GET',
+                    url: "http://localhost:9000/api/entry/" + result._id
+                },
+                text: result.text,
+            }
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    }) */
 })
 
 //Delete entry.
