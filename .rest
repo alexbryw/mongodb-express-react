@@ -52,9 +52,8 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:9000/api/user/login
+DELETE  http://localhost:9000/api/user/logout
 Content-Type: application/json
 
 {
-    "name": "Rex DELETE"
 }

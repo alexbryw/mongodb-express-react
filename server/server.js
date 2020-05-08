@@ -1,4 +1,5 @@
 const express = require('express')
+const cookieSession = require('cookie-session')
 const app = express()
 require('./connection') //Establish connection to mongodb.
 const cors = require('cors') // Needed for cross origin.
@@ -9,6 +10,13 @@ const entryRoute = require('./routers/entry')
 const loginRoute = require('./routers/login')
 
 app.use(cors())
+app.use(cookieSession({
+    secret: 'secretKey',
+    maxAge: 1000 * 12, //12 sec cookie timeout.
+    sameSite: 'strict',
+    httpOnly: true,
+    secure: false
+}))
 app.use(express.json())
 app.use(userRoute)
 app.use(loginRoute)
