@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const fs = require('fs')
 const mongoose = require("mongoose");
 let Entry = require('../models/Entry.model')
 const imageUrl = require('../models/Entry.model')
@@ -133,47 +134,28 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
 
 //Update entry.
 router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
-    console.log('This is the body :', req.body)
+
     try{
         const id = req.params.id
         const entry = await Entry.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
+        console.log('maybe the image: ', entry.image)
+        const path = `./${entry.image}`
+        fs.unlink(path, (err) => {
+            if (err) {
+              console.error(err)      
+            }
+        },  
         res.json({
+
             old: entry,
             new: req.body
-        })
+        }))
     } catch(err){
         console.log(err)
         res.status(500).json({
             error: err
         })
     }
-    /* const id = req.params.id
-    const updates = req.body
-    console.log('this is body', req.body)
-    Entry.findByIdAndUpdate(id, 
-        updates
-    )
-    .then(result => {
-        console.log('this is result:', result)
-        res.status(201).json({
-            updatedEntry: {
-                _id: result._id,
-                username: result.username,
-                title: result.title,
-                request: {
-                    type: 'GET',
-                    url: "http://localhost:9000/api/entry/" + result._id
-                },
-                text: result.text,
-            }
-        })
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({
-            error: err
-        })
-    }) */
 })
 
 //Delete entry.
