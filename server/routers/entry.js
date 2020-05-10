@@ -138,18 +138,17 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
     try{
         const id = req.params.id
         const entry = await Entry.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
-        console.log('maybe the image: ', entry.image)
         const path = `./${entry.image}`
         fs.unlink(path, (err) => {
             if (err) {
               console.error(err)      
             }
-        },  
-        res.json({
+        })  //HOPE IT STill works
+        res.status(200).json({
 
             old: entry,
             new: req.body
-        }))
+        })
     } catch(err){
         console.log(err)
         res.status(500).json({
@@ -159,9 +158,31 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
 })
 
 //Delete entry.
-router.delete('/api/entry', function (req, res) {
-    //const {_id} = req.body
-    res.json({msg:"from DELETE /api/entry"})
+router.delete('/api/entry/:id', async (req, res) => {
+    try{
+        const id = req.params.id
+        const entry =  await Entry.findById(id)
+        const path = `./${entry.image}`
+
+        Entry.findByIdAndDelete(id, (err) => {
+            if(err){
+                console.log('Nothing deleted')
+            }
+            fs.unlink(path, (err) => {
+                if (err) {
+                    console.error(err)      
+                }
+            })
+        })
+        res.status(200).json('Deletion went well')
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    }
 })
+
 
 module.exports = router
