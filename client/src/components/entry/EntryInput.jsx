@@ -68,10 +68,17 @@ export default class EntryInput extends React.Component{
     }
 
     render(){
+        const textfieldStyle = {
+            width: "100%",
+            marginTop: "1em"
+        }
+
         return(
             <FormControl>
                 <TextField 
                     required label="Title" 
+                    color="secondary"
+                    style={textfieldStyle}
                     error = {this.state.isTitleError}
                     onChange = {this.selectedTitleHandler}
                     />
@@ -83,7 +90,7 @@ export default class EntryInput extends React.Component{
                 />
                 <label htmlFor="icon-button-file">
                     <IconButton 
-                        color="primary" 
+                        color="secondary"
                         aria-label="upload picture" 
                         component="span">
                     <PhotoCamera />
@@ -94,12 +101,17 @@ export default class EntryInput extends React.Component{
                     multiline
                     rows="4"
                     variant="outlined"
+                    style={textfieldStyle}
+                    color="secondary"
                     inputProps={{
                         maxLength: 140,
                     }}
                     onChange = {this.selectedTextHandler}
                 />                           
-                <Button variant="contained" color="primary" onClick = {this.entryUploadHandler}>
+                <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    onClick = {this.entryUploadHandler}>
                     submit
                 </Button>
             </FormControl>

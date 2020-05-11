@@ -143,7 +143,7 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
             if (err) {
               console.error(err)      
             }
-        })  //HOPE IT STill works
+        })
         res.status(200).json({
 
             old: entry,

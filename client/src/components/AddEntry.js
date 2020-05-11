@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import EntryInput from './entry/EntryInput'
 
 
 export default function AddEntry(props) {
@@ -21,10 +22,6 @@ export default function AddEntry(props) {
         backgroundColor: '#d1c4e9',
         height: "80vh",
         marginBottom: "calc(20vh-5em)"
-    }
-    const textfieldStyle = {
-        width: "80%",
-        marginTop: "1em"
     }
 
     if(useMediaQuery('(min-width:37em)')){
@@ -55,7 +52,7 @@ export default function AddEntry(props) {
                 
             </div>
             </Grid>
-            <form>
+{/*             <form>
                 <TextField
                         required
                         id="outlined-required"
@@ -90,7 +87,8 @@ export default function AddEntry(props) {
                     Edit
                 </Button>
 
-                </form>
+                </form> */}
+                <EntryInput/>
 
             </CardContent>
         </Card>
