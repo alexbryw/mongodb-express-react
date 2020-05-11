@@ -4,13 +4,17 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const User = require('../models/User.model')
 
-//Get user.
-router.get('/api/user',secureRoute("admin"), function (req, res) {
-    res.json({msg:"from GET /api/user"})
-    //TODO return all users to admin.
+//Get all user to admin accounts.
+router.get('/api/user',secureRoute("admin"), async function (req, res) {
+    const users = await User.find({})
+    if(users.length < 1){
+        res.status(404).json({msg: "Users not found."})
+    } else {
+        res.json(users)
+    }
 })
 
-//Add user.
+//Add a new user, open to all visitors.
 router.post('/api/user', async function (req, res) {
     let cryptPassword
     if(!req.body.password || req.body.password.length < 5){
@@ -35,16 +39,25 @@ router.post('/api/user', async function (req, res) {
     }
 })
 
-//Update user.
+//Admin can update a user.
 router.put('/api/user',secureRoute("admin"), function (req, res) {
     res.json({msg:"from PUT /api/user"})
     //TODO admin updates users.
 })
 
-//Delete user.
-router.delete('/api/user',secureRoute("admin"), function (req, res) {
-    res.json({msg:"from DELETE /api/user"})
-    //TODO admin can delete users.
+//Admin can delete a user.
+router.delete('/api/user',secureRoute("admin"), async function (req, res) {
+    if(req.body.username){
+        const user = await User.findOneAndDelete({username: req.body.username})
+        if(user){
+            res.json(user)
+        } else {
+            res.status(404).json({msg: "User not found."})
+        }
+
+    } else {
+        res.status(400).json({msg: "Username required to delete a user."})
+    }
 })
 
 //Check if user has correct access privileges like 'admin' or 'user'.
