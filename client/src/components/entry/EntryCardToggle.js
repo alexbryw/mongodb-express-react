@@ -16,9 +16,6 @@ export default class EntryCardToggle extends React.Component  {
     }
 
     render(){
-
-        console.log(this.props.entryData)
-
         return (
             <div>
                 {this.state.editMode? 
