@@ -40,15 +40,30 @@ router.post('/api/user', async function (req, res) {
 })
 
 //Admin can update a user.
-router.put('/api/user',secureRoute("admin"), function (req, res) {
-    res.json({msg:"from PUT /api/user"})
-    //TODO update user by id.
+router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
+    // console.log(req.params.id)
+    if(!req.body.username && !req.body.password && req.body.admin){
+        res.status(400).json(
+            {msg: "Pleas provide 'username' or 'password' or 'admin' to update."})
+        return
+    }
+
+    User.findByIdAndUpdate({_id: req.params.id}, req.body, function(err, user){
+        if(err) return res.status(404).json({msg: "Error wrong user id format."})
+        if(user){
+            res.json(user)
+        } else {
+            res.status(404).json({msg: "User could not be updated."})
+        }
+    })
+
+    //TODO return updated user and not old user info.
 })
 
 //Admin can delete a user.
 router.delete('/api/user/:id',secureRoute("admin"), async function (req, res) {
     User.findByIdAndDelete({_id: req.params.id}, function(err, user){
-        if(err) return res.status(404).json({msg: "Error user id not found."})
+        if(err) return res.status(404).json({msg: "Error wrong user id format."})
         if(user){
             res.json(user)
         } else {
