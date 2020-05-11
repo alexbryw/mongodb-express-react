@@ -42,7 +42,7 @@ export default function EntryEdit(props) {
                         required
                         id="outlined-required"
                         label="Temporär BildURL"
-                        defaultValue={props.entryData.image}
+                        defaultValue={"props.entryData.image"}
                         variant="outlined"
                         fullWidth
                         color="secondary"

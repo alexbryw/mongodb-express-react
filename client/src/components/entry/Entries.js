@@ -11,23 +11,26 @@ export default class Enties extends Component {
     }
     
     render() {
-        const entries = this.props.entryData
-        console.log(entries)
-        return (
-            <div>
-                <Grid
-                    container
-                    direction="column"
-                    justify="space-between"
-                    alignItems="center"
-                >
-                {entryArray.map((entry) =>
-                    <EntryCard entryData={ entry } key={entry.id}/>
-                )}
-                
-                </Grid>
-            </div>
-        )
+        const entries = this.props.entryData.entries
+        if(typeof entries === "function"){
+            return (<div></div>) //nicer loading here
+        } else {
+            return (
+                <div>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="space-between"
+                        alignItems="center"
+                    >
+                    {entries.map((entry) =>
+                        <EntryCard entryData={ entry } key={entry._id}/>
+                    )}
+                    
+                    </Grid>
+                </div>
+            )
+        }
     }
 }
 

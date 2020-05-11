@@ -6,7 +6,8 @@ export default class EntryCardToggle extends React.Component  {
     constructor(props){
         super(props)
         this.state = {
-            editMode: false
+            editMode: false,
+            apiResponse: ""
         }
     }
 
@@ -15,6 +16,9 @@ export default class EntryCardToggle extends React.Component  {
     }
 
     render(){
+
+        console.log(this.props.entryData)
+
         return (
             <div>
                 {this.state.editMode? 

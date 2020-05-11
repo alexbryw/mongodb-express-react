@@ -32,12 +32,11 @@ export default function EntryCard(props) {
         }
     }
 
-
-  return (
-    <Grid item>
-        <Card style={{...cardStyle, ...entryWidth}}>
-            <EntryCardToggle entryData={props.entryData}/>
-        </Card>
-    </Grid>
+    return (
+        <Grid item>
+            <Card style={{...cardStyle, ...entryWidth}}>
+                <EntryCardToggle entryData={ props.entryData }/>
+            </Card>
+        </Grid>
   );
 }

@@ -29,7 +29,8 @@ export default function EntryCardContent(props) {
         }
     }
 
-  return (
+    const image = "http://localhost:9000/" + props.entryData.image
+    return (
         <div>
             <CardContent>
             <Grid
@@ -50,8 +51,8 @@ export default function EntryCardContent(props) {
             </Grid>
             </CardContent>
             <CardMedia
-            image={props.entryData.image}
-            title="Contemplative Reptile"
+            image={image}
+            title="Image"
             style={entryImageSize}
             />
             <CardContent>
