@@ -46,15 +46,14 @@ POST http://localhost:9000/api/user/login
 Content-Type: application/json
 
 {
-    "name": "Rex POST",
-    "password": "123456"
+    "username": "admin",
+    "password": "admin"
 }
 
 ###
 
-DELETE  http://localhost:9000/api/user/login
+DELETE  http://localhost:9000/api/user/logout
 Content-Type: application/json
 
 {
-    "name": "Rex DELETE"
 }
