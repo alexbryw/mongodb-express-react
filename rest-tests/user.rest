@@ -22,12 +22,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:9000/api/user
-Content-Type: application/json
-
-{
-    "username": "Lex"
-}
+DELETE http://localhost:9000/api/user/5eb932090566072d281c5bb9
 
 ###
 
@@ -42,7 +37,5 @@ Content-Type: application/json
 ###
 
 DELETE  http://localhost:9000/api/user/logout
-Content-Type: application/json
 
-{
-}
+###

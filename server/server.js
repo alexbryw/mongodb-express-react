@@ -12,14 +12,15 @@ const loginRoute = require('./routers/login')
 app.use(cors())
 app.use(cookieSession({
     secret: 'secretKey',
-    maxAge: 1000 * 12, //12 sec cookie timeout.
+    maxAge: 1000 * 15, //15 sec cookie timeout.
     sameSite: 'strict',
     httpOnly: true,
     secure: false
 }))
 app.use(express.json())
+//loginRoute should be above userRoute so delete logout works before delete user.
+app.use(loginRoute) 
 app.use(userRoute)
-app.use(loginRoute)
 app.use(entryRoute)
 
 app.get('/', (req, res) => res.json({someText: 'From express API! 9000!'}))

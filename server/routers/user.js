@@ -42,22 +42,20 @@ router.post('/api/user', async function (req, res) {
 //Admin can update a user.
 router.put('/api/user',secureRoute("admin"), function (req, res) {
     res.json({msg:"from PUT /api/user"})
-    //TODO admin updates users.
+    //TODO update user by id.
 })
 
 //Admin can delete a user.
-router.delete('/api/user',secureRoute("admin"), async function (req, res) {
-    if(req.body.username){
-        const user = await User.findOneAndDelete({username: req.body.username})
+router.delete('/api/user/:id',secureRoute("admin"), async function (req, res) {
+    User.findByIdAndDelete({_id: req.params.id}, function(err, user){
+        if(err) return res.status(404).json({msg: "Error user id not found."})
         if(user){
             res.json(user)
         } else {
             res.status(404).json({msg: "User not found."})
         }
-
-    } else {
-        res.status(400).json({msg: "Username required to delete a user."})
-    }
+        console.log(user)
+    })
 })
 
 //Check if user has correct access privileges like 'admin' or 'user'.
