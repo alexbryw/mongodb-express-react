@@ -18,12 +18,12 @@ Content-Type: application/json
 {
     "username": "Rex put",
     "password": "password",
-    "admin": "true"
+    "admin": "false"
 }
 
 ###
 
-DELETE http://localhost:9000/api/user/5eb932090566072d281c5bb9
+DELETE http://localhost:9000/api/user/5eb9371009094815bc038695
 
 ###
 

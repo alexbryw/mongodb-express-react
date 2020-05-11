@@ -48,7 +48,7 @@ router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
         return
     }
 
-    User.findByIdAndUpdate({_id: req.params.id}, req.body, function(err, user){
+    User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user){
         if(err) return res.status(404).json({msg: "Error wrong user id format."})
         if(user){
             res.json(user)
