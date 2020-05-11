@@ -1,0 +1,18 @@
+
+POST http://localhost:9000/api/entry
+Content-Type: application/json
+
+{
+    "title": "title abc",
+    "imgUrl": "http://imgur.com/pic1"
+}
+
+###
+
+PUT http://localhost:9000/api/entry
+Content-Type: application/json
+
+{
+    "title": "title abc",
+    "imgUrl": "http://imgur.com/pic2"
+}
