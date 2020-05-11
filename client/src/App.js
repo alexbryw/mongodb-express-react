@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Layout from './components/Layout';
+import Theme from './MuiTheme'
 
 class App extends React.Component {
   constructor(){
@@ -12,7 +15,7 @@ class App extends React.Component {
   async callAPI(){
     let response = await fetch("http://localhost:9000")
     let data = await response.json()
-    this.setState({apiResponse: data.someText})
+    //this.setState({apiResponse: data.someText})
   }
 
   componentDidMount(){
@@ -21,10 +24,11 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App">
-        <h2>React Client</h2>
-        <h3>From API:  {this.state.apiResponse}</h3>
-      </div>
+      <ThemeProvider theme={Theme}>
+        <div className="App">
+          <Layout/>
+        </div>
+      </ThemeProvider>
     );
   }
 
