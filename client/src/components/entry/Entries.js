@@ -19,7 +19,6 @@ export default class Enties extends Component {
                     direction="column"
                     justify="space-between"
                     alignItems="center"
-                    spacing={3}
                 >
                 {entryArray.map((entry) =>
                     <EntryCard entryData={ entry } key={entry.id}/>

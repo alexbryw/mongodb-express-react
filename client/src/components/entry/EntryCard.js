@@ -17,7 +17,8 @@ export default function EntryCard(props) {
     }
 
     const cardStyle = {
-        backgroundColor: '#d1c4e9'
+        backgroundColor: '#d1c4e9',
+        marginBottom: "1em"
     }
 
     if(useMediaQuery('(min-width:37em)')){
