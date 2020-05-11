@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const entrySchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     username: {
         type:String,
         required: true
@@ -21,6 +22,11 @@ const entrySchema = new Schema({
         maxlength: 140
     }
 })
+/* 
+const imageUrl = entrySchema.virtual('imageUrl')
+imageUrl.get(function(value, virtual, doc){
+    return 'http://localhost:9000/' + doc.image
+}) */
 
 const Entry = mongoose.model('Entry', entrySchema)
 
