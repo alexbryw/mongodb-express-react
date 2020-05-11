@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import EntryInput from './components/EntryInput'
 
 class App extends React.Component {
   constructor(){
@@ -25,7 +24,6 @@ class App extends React.Component {
       <div className="App">
         <h2>React Client</h2>
         <h3>From API:  {this.state.apiResponse}</h3>
-        <EntryInput/>
       </div>
     );
   }
