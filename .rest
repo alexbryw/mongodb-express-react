@@ -6,8 +6,8 @@ POST http://localhost:9000/api/user
 Content-Type: application/json
 
 {
-    "name": "Rex post",
-    "mail": "abc@abc.com"
+    "username": "Lex",
+    "password": "123456"
 }
 
 ###
