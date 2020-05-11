@@ -8,14 +8,14 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      apiResponse: ""
+      apiResponse: []
     }
   }
 
   async callAPI(){
-    let response = await fetch("http://localhost:9000")
+    let response = await fetch("http://localhost:9000/api/entry/")
     let data = await response.json()
-    //this.setState({apiResponse: data.someText})
+    this.setState({apiResponse: data})
   }
 
   componentDidMount(){
@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={Theme}>
         <div className="App">
-          <Layout/>
+          <Layout entryData={this.state.apiResponse}/>
         </div>
       </ThemeProvider>
     );
