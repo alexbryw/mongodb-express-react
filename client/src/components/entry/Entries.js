@@ -5,13 +5,14 @@ import entryArray from '../../testArray/entryArray';
 
 
 export default class Enties extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state ={}
     }
     
     render() {
-
+        const entries = this.props.entryData
+        console.log(entries)
         return (
             <div>
                 <Grid
