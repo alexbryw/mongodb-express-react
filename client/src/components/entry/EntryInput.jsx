@@ -73,29 +73,48 @@ export default class EntryInput extends React.Component{
             marginTop: "1em"
         }
 
+        const formStyle = {
+            width:'100%'
+        }
+
+        const fileUploadStyle = {
+            
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+        }
+
+        const hide = {
+            display: "none"
+        }
+
         return(
-            <FormControl>
+            <FormControl style = {formStyle}>
                 <TextField 
                     required label="Title" 
                     color="secondary"
                     style={textfieldStyle}
                     error = {this.state.isTitleError}
                     onChange = {this.selectedTitleHandler}
-                    />
-                <input 
-                    required accept="image/png, image/jpeg" 
-                    type="file" 
-                    id="icon-button-file" 
-                    onChange = {this.selectedFileHandler}
                 />
-                <label htmlFor="icon-button-file">
-                    <IconButton 
-                        color="secondary"
-                        aria-label="upload picture" 
-                        component="span">
-                    <PhotoCamera />
-                    </IconButton>
-                </label>
+                    <input 
+                        required accept="image/png, image/jpeg" 
+                        type="file" 
+                        id="icon-button-file"
+                        style = {hide}
+                        onChange = {this.selectedFileHandler}
+                    />
+                    <label htmlFor="icon-button-file">
+                        
+                        <IconButton 
+                            color="secondary"
+                            aria-label="upload picture" 
+                            component="span">
+                        <PhotoCamera 
+                        style = {{fontSize: "4rem"}}/>
+                        </IconButton>
+                        <p>{this.state.selectedFile? (this.state.selectedFile.name) : ("")}</p>
+                    </label>
                 <TextField
                     label= "Text, max 140 characters"
                     multiline
