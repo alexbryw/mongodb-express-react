@@ -103,4 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-uploads
+# exclude everything in folder
+server/uploads/*
+
+# exception to the rule
+!server/uploads/.gitkeep 
