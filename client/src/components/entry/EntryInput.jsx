@@ -3,7 +3,8 @@ import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera'; 
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import {Redirect} from 'react-router-dom'
 
 
 export default class EntryInput extends React.Component{
@@ -14,6 +15,7 @@ export default class EntryInput extends React.Component{
         text: "",
         isTitleError: false,
         isImageError: false,
+        redirect: false
     }
 
     selectedTitleHandler = event => {
@@ -61,7 +63,6 @@ export default class EntryInput extends React.Component{
             fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
             fd.append('text', this.state.text)
         
-            console.log(...fd)
             fetch(`http://localhost:9000/api/entry/`,{
                 method: 'POST',
                 body: fd
@@ -70,12 +71,22 @@ export default class EntryInput extends React.Component{
             .catch(error => {
                 if(error.response) { 
                     console.log(error.response.data)
-                  }
+                }
             })
             .then(response => console.log('Success:', JSON.stringify(response))) 
+            
+            this.setState({
+                redirect:true
+            })
         }
 
     }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/' />
+        }
+      }
 
     render(){
         const textfieldStyle = {
@@ -99,7 +110,10 @@ export default class EntryInput extends React.Component{
         }
 
         return(
+            <>
+            {this.renderRedirect()}
             <FormControl style = {formStyle}>
+                
                 <TextField 
                     required label="Title" 
                     color="secondary"
@@ -144,6 +158,7 @@ export default class EntryInput extends React.Component{
                     submit
                 </Button>
             </FormControl>
+            </>
 
         )
     }
