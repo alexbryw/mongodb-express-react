@@ -8,14 +8,54 @@ import {Redirect} from 'react-router-dom'
 
 
 export default class EntryInput extends React.Component{
-    state = {
-        username: 'starstoft',
-        title: "",
-        selectedFile: null,
-        text: "",
-        isTitleError: false,
-        isImageError: false,
-        redirect: false
+    constructor(props){
+        super(props)
+        this.state = {
+            username: 'starstoft',
+            title: "",
+            selectedFile: null,
+            text: "",
+            isTitleError: false,
+            titleErrorText: '',
+            isImageError: false,
+            imageErrorText: '',
+            redirect: false
+        }
+    }
+
+    validateInput = () => {
+        let isError = false
+        const errors = {
+            titleErrorText: '',
+            isTitleError: false,
+            imageErrorText: '',
+            isErrorImage: false
+        }
+            if(this.state.title === ""){
+                isError = true
+                errors.titleErrorText = 'It needs a title'
+                errors.isTitleError = true
+            }/* else{
+                this.setState({
+                    isTitleError: false
+                })
+            } */
+            if(this.state.selectedFile === null){
+                isError = true
+                errors.imageErrorText = 'It needs an image'
+                errors.isErrorImage = true
+            }/* else{
+                this.setState({
+                    isImageError: true
+                })
+            } */
+            if(isError){
+                this.setState({
+                  ...this.state,
+                  ...errors,
+                })
+            }
+            return isError
     }
 
     selectedTitleHandler = event => {
@@ -37,26 +77,9 @@ export default class EntryInput extends React.Component{
     }
 
     entryUploadHandler = () => {
-        if((this.state.title === "") || (this.state.selectedFile === null)){
-            if(this.state.title === ""){
-                this.setState({
-                    isTitleError: true
-                })
-            }else{
-                this.setState({
-                    isTitleError: false
-                })
-            }
-            if(this.state.selectedFile === null){
-                this.setState({
-                    isImageError: true
-                })
-            }else{
-                this.setState({
-                    isImageError: true
-                })
-            }
-        }else{
+        const err = this.validateInput()
+
+        if(!err){
             const fd = new FormData()
             fd.append('username', this.state.username)
             fd.append('title', this.state.title)
@@ -81,6 +104,8 @@ export default class EntryInput extends React.Component{
         }
 
     }
+
+    
 
     renderRedirect = () => {
         if (this.state.redirect) {
@@ -120,6 +145,7 @@ export default class EntryInput extends React.Component{
                     style={textfieldStyle}
                     error = {this.state.isTitleError}
                     onChange = {this.selectedTitleHandler}
+                    helperText = {this.state.titleErrorText} 
                 />
                     <input 
                         required accept="image/png, image/jpeg" 
@@ -127,6 +153,7 @@ export default class EntryInput extends React.Component{
                         id="icon-button-file"
                         style = {hide}
                         onChange = {this.selectedFileHandler}
+                        
                     />
                     <label htmlFor="icon-button-file">
                         
@@ -137,6 +164,7 @@ export default class EntryInput extends React.Component{
                         <PhotoCamera 
                         style = {{fontSize: "4rem"}}/>
                         </IconButton>
+                        <p style = {{color: 'red'}}>{this.state.isImageError? (""):(this.state.imageErrorText)}</p>
                         <p>{this.state.selectedFile? (this.state.selectedFile.name) : ("")}</p>
                     </label>
                 <TextField
