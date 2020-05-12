@@ -2,7 +2,6 @@ import React from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-// import Input from '@material-ui/core/Input'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'; 
 
@@ -11,9 +10,8 @@ export default class EntryAlter extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            title: "",
-            text: "",
-            isTitleError: false,
+            title: this.props.entryData.title,
+            text: this.props.entryData.text,
         }
     }
 
@@ -33,13 +31,13 @@ export default class EntryAlter extends React.Component{
     //WILL NEED A ONCHANGE FOR USER
 
     entryUploadHandler = () => {
-        if((this.state.title === "")){
-            if(this.state.title === ""){
-                this.setState({
-                    isTitleError: true
-                })
+            if((this.state.title === "")){
+                if(this.state.title === ""){
+                    this.setState({
+                        isTitleError: this.props.entryData.title
+                    })
+                }
             }
-        } else{
             let updatedEntry = {
                 title: this.state.title,
                 text: this.state.text,
@@ -56,14 +54,20 @@ export default class EntryAlter extends React.Component{
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', JSON.stringify(response))) 
-        }
+        
 
     }
 
     render(){
-        const textfieldStyle = {
+        const entryAlterStyle = {
             width: "100%",
             margin: "0.5em 0"
+        }
+
+        const image = "http://localhost:9000/" + this.props.entryData.image;
+
+        let entryImage = {   
+            maxWidth:'100%',
         }
 
         return(
@@ -71,31 +75,19 @@ export default class EntryAlter extends React.Component{
                 <TextField 
                     required label="Title" 
                     color="secondary"
-                    style={textfieldStyle}
-                    error = {this.state.isTitleError}
+                    style={entryAlterStyle}
                     onChange = {this.selectedTitleHandler}
                     defaultValue={this.props.entryData.title}
+                    variant="outlined" 
+                    fullWidth
                     />
-                <input 
-                    required accept="image/png, image/jpeg" 
-                    type="file" 
-                    id="icon-button-file"
-                    onChange = {this.selectedFileHandler}
-                />
-                <label htmlFor="icon-button-file">
-                    <IconButton 
-                        color="secondary"
-                        aria-label="upload picture" 
-                        component="span">
-                    <PhotoCamera />
-                    </IconButton>
-                </label>
+                <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>
                 <TextField
                     label= "Text, max 140 characters"
                     multiline
                     rows="4"
                     variant="outlined"
-                    style={textfieldStyle}
+                    style={entryAlterStyle}
                     color="secondary"
                     inputProps={{
                         maxLength: 140,
@@ -106,7 +98,7 @@ export default class EntryAlter extends React.Component{
                 <Button 
                     variant="outlined" 
                     color="secondary"
-                    style={textfieldStyle}
+                    style={entryAlterStyle}
                     onClick = {this.entryUploadHandler}>
                     Edit
                 </Button>
