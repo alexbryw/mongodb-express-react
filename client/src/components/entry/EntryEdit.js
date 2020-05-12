@@ -15,6 +15,10 @@ export default function EntryEdit(props) {
         marginBottom: "1em"
     }
 
+    function handleDelete(){
+        fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, {method:'DELETE'})
+    }
+
     return (
         <div>
             <CardContent>
@@ -29,7 +33,7 @@ export default function EntryEdit(props) {
                 </IconButton>
             </Grid>
             <EntryAlter entryData={props.entryData}/>
-            <Button variant="contained" color="secondary" style={textfieldStyle}>
+            <Button variant="contained" color="secondary" style={textfieldStyle} onClick={handleDelete}>
                 Delete
             </Button>
             </CardContent>
