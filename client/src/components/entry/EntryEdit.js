@@ -22,20 +22,20 @@ export default function EntryEdit(props) {
     return (
         <div>
             <CardContent>
-            <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-            >   
-                <IconButton color="secondary" size="small" onClick={props.editModeClick}>
-                    <ArrowBackIcon />
-                </IconButton>
-            </Grid>
-            <EntryAlter entryData={props.entryData}/>
-            <Button variant="contained" color="secondary" style={textfieldStyle} onClick={handleDelete}>
-                Delete
-            </Button>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >   
+                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                </Grid>
+                <EntryAlter entryData={props.entryData}/>
+                <Button variant="contained" color="secondary" style={textfieldStyle} onClick={handleDelete}>
+                    Delete
+                </Button>
             </CardContent>
         </div>
   );

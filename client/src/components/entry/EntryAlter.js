@@ -60,18 +60,19 @@ export default class EntryAlter extends React.Component{
 
     render(){
         const entryAlterStyle = {
-            width: "100%",
+            width: "80%",
             margin: "0.5em 0"
         }
 
         const image = "http://localhost:9000/" + this.props.entryData.image;
 
         let entryImage = {   
-            maxWidth:'100%',
+            maxWidth:'80%',
+            minWidth: '80%'
         }
 
         return(
-            <FormControl>
+            <div>
                 <TextField 
                     required label="Title" 
                     color="secondary"
@@ -94,15 +95,17 @@ export default class EntryAlter extends React.Component{
                     }}
                     defaultValue={this.props.entryData.text}
                     onChange = {this.selectedTextHandler}
+                    fullWidth
                 />                           
                 <Button 
                     variant="outlined" 
                     color="secondary"
                     style={entryAlterStyle}
+                    fullWidth
                     onClick = {this.entryUploadHandler}>
                     Edit
                 </Button>
-            </FormControl>
+            </div>
 
         )
     }

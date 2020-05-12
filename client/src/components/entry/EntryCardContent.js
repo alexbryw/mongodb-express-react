@@ -23,7 +23,7 @@ export default function EntryCardContent(props) {
     }
 
     return (
-        <div>
+        <>
             <CardContent>
             <Grid
                 container
@@ -48,6 +48,6 @@ export default function EntryCardContent(props) {
                     {props.entryData.text}
                 </Typography>
             </CardContent>
-        </div>
+        </>
   );
 }
