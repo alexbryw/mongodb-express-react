@@ -18,7 +18,7 @@ app.use(cookieSession({
     secure: false
 }))
 app.use(express.json())
-app.use(express.static('uploads'))
+app.use('/uploads', express.static('uploads'))
 //loginRoute should be above userRoute so delete logout works before delete user.
 app.use(loginRoute) 
 app.use(userRoute)

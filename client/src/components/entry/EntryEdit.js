@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
+import EntryAlter from './EntryAlter';
 
 export default function EntryEdit(props) {
 
@@ -14,59 +15,27 @@ export default function EntryEdit(props) {
         marginBottom: "1em"
     }
 
+    function handleDelete(){
+        fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, {method:'DELETE'})
+    }
+
     return (
         <div>
             <CardContent>
-            <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-            >   
-                <IconButton color="secondary" size="small" onClick={props.editModeClick}>
-                    <ArrowBackIcon />
-                </IconButton>
-            </Grid>
-            <form>
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Titel"
-                        defaultValue={props.entryData.title}
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Temporär BildURL"
-                        defaultValue={props.entryData.image}
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Text"
-                        defaultValue={props.entryData.text}
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <Button variant="outlined" color="secondary" style={textfieldStyle}>
-                    Edit
-                </Button>
-                <Button variant="contained" color="secondary" style={textfieldStyle}>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >   
+                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                </Grid>
+                <EntryAlter entryData={props.entryData}/>
+                <Button variant="contained" color="secondary" style={textfieldStyle} onClick={handleDelete}>
                     Delete
                 </Button>
-
-                </form>
-
             </CardContent>
         </div>
   );

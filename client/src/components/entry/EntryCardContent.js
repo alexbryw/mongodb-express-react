@@ -9,28 +9,21 @@ import EditIcon from '@material-ui/icons/Edit';
 
 export default function EntryCardContent(props) {
 
-    let entryImageSize = {   
-        width:'95vw',
-        height:'95vw',
-    }
+    const image = "http://localhost:9000/" + props.entryData.image;
 
-    let entryWidth = {   
+    let entryImage = {   
         width:'95vw',
     }
 
     if(useMediaQuery('(min-width:37em)')){
-        entryImageSize = {
+        entryImage = {
             width:'35em', 
-            height:'35em'
         }
 
-        entryWidth = {   
-            width:'35em',
-        }
     }
 
-  return (
-        <div>
+    return (
+        <>
             <CardContent>
             <Grid
                 container
@@ -49,16 +42,12 @@ export default function EntryCardContent(props) {
                 </Typography>
             </Grid>
             </CardContent>
-            <CardMedia
-            image={props.entryData.image}
-            title="Contemplative Reptile"
-            style={entryImageSize}
-            />
+            <img style={entryImage} src={image} alt={props.entryData.title + " image"}></img>
             <CardContent>
                 <Typography variant="body2" align="left" color="textSecondary" component="p">
                     {props.entryData.text}
                 </Typography>
             </CardContent>
-        </div>
+        </>
   );
 }

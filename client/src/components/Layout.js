@@ -6,8 +6,8 @@ import AddEntry from './AddEntry';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 export default class Layout extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {}
     }
     
@@ -20,16 +20,13 @@ export default class Layout extends Component {
             backgroundAttachment: "fixed",
             backgroundImage: "linear-gradient(#4a148c, #7c43bd)"
         }
-
-
-
         return (
             <div style={backgroundColor}>
                 <BrowserRouter>
                     <Header/>
                     <Switch>
                         <Route exact path="/">
-                            <Entries/>
+                            <Entries entryData={this.props.entryData}/>
                         </Route>
                         <Route path="/user">
                             <User/>
