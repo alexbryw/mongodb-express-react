@@ -1,0 +1,42 @@
+GET http://localhost:9000/api/user
+
+###
+
+POST http://localhost:9000/api/user
+Content-Type: application/json
+
+{
+    "username": "Lex",
+    "password": "123456"
+}
+
+###
+
+PUT http://localhost:9000/api/user/5eb9371009094815bc038695
+Content-Type: application/json
+
+{
+    "username": "Rex put",
+    "password": "password",
+    "admin": "false"
+}
+
+###
+
+DELETE http://localhost:9000/api/user/5eb9371009094815bc038695
+
+###
+
+POST http://localhost:9000/api/user/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+
+DELETE  http://localhost:9000/api/user/logout
+
+###

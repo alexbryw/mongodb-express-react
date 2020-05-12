@@ -134,16 +134,16 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
     try{
         const id = req.params.id
         const entry = await Entry.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
-        const path = `./${entry.image}`
-        fs.unlink(path, (err) => {
-            if (err) {
-              console.error(err)      
-            }
-        })
         res.status(200).json({
 
             old: entry,
-            new: req.body
+            new: {
+                _id: req.params.id,
+                username: req.params.username,
+                title: entry.title,
+                image: entry.image,
+                text: entry.text
+            }
         })
     } catch(err){
         console.log(err)

@@ -17,7 +17,8 @@ export default function EntryCard(props) {
     }
 
     const cardStyle = {
-        backgroundColor: '#d1c4e9'
+        backgroundColor: '#d1c4e9',
+        marginBottom: "1em"
     }
 
     if(useMediaQuery('(min-width:37em)')){
@@ -31,12 +32,11 @@ export default function EntryCard(props) {
         }
     }
 
-
-  return (
-    <Grid item>
-        <Card style={{...cardStyle, ...entryWidth}}>
-            <EntryCardToggle entryData={props.entryData}/>
-        </Card>
-    </Grid>
+    return (
+        <Grid item>
+            <Card style={{...cardStyle, ...entryWidth}}>
+                <EntryCardToggle entryData={ props.entryData }/>
+            </Card>
+        </Grid>
   );
 }
