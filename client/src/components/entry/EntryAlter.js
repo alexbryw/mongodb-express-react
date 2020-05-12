@@ -43,6 +43,7 @@ export default class EntryAlter extends React.Component{
             let updatedEntry = {
                 title: this.state.title,
                 text: this.state.text,
+                image: this.props.entryData.image
             }
         
             fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{
