@@ -2,7 +2,6 @@ import React from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-// import Input from '@material-ui/core/Input'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'; 
 
@@ -41,14 +40,21 @@ export default class EntryInput extends React.Component{
                 this.setState({
                     isTitleError: true
                 })
+            }else{
+                this.setState({
+                    isTitleError: false
+                })
             }
             if(this.state.selectedFile === null){
                 this.setState({
                     isImageError: true
                 })
+            }else{
+                this.setState({
+                    isImageError: true
+                })
             }
-        }
-        else{
+        }else{
             const fd = new FormData()
             fd.append('username', this.state.username)
             fd.append('title', this.state.title)
@@ -61,7 +67,11 @@ export default class EntryInput extends React.Component{
                 body: fd
             })
             .then(response => response.json())
-            .catch(error => console.error('Error:', error))
+            .catch(error => {
+                if(error.response) { 
+                    console.log(error.response.data)
+                  }
+            })
             .then(response => console.log('Success:', JSON.stringify(response))) 
         }
 
