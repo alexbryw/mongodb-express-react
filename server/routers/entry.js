@@ -147,7 +147,13 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
         res.status(200).json({
 
             old: entry,
-            new: req.body
+            new: {
+                _id: req.params.id,
+                username: req.params.username,
+                title: entry.title,
+                image: req.params.image,
+                text: entry.text
+            }
         })
     } catch(err){
         console.log(err)

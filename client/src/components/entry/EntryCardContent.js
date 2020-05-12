@@ -29,7 +29,7 @@ export default function EntryCardContent(props) {
         }
     }
 
-    const image = "http://localhost:9000/" + props.entryData.image
+    const image = "http://localhost:9000/" + props.entryData.image;
     return (
         <div>
             <CardContent>
@@ -52,7 +52,7 @@ export default function EntryCardContent(props) {
             </CardContent>
             <CardMedia
             image={image}
-            title="Image"
+            title={props.entryData.title}
             style={entryImageSize}
             />
             <CardContent>
