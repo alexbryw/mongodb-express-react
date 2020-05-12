@@ -1,11 +1,9 @@
 import React from 'react'
-import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {Redirect} from 'react-router-dom'
-
 
 export default class EntryInput extends React.Component{
     constructor(props){
@@ -21,41 +19,6 @@ export default class EntryInput extends React.Component{
             imageErrorText: '',
             redirect: false
         }
-    }
-
-    validateInput = () => {
-        let isError = false
-        const errors = {
-            titleErrorText: '',
-            isTitleError: false,
-            imageErrorText: '',
-            isErrorImage: false
-        }
-            if(this.state.title === ""){
-                isError = true
-                errors.titleErrorText = 'It needs a title'
-                errors.isTitleError = true
-            }/* else{
-                this.setState({
-                    isTitleError: false
-                })
-            } */
-            if(this.state.selectedFile === null){
-                isError = true
-                errors.imageErrorText = 'It needs an image'
-                errors.isErrorImage = true
-            }/* else{
-                this.setState({
-                    isImageError: true
-                })
-            } */
-            if(isError){
-                this.setState({
-                  ...this.state,
-                  ...errors,
-                })
-            }
-            return isError
     }
 
     selectedTitleHandler = event => {
@@ -74,6 +37,35 @@ export default class EntryInput extends React.Component{
         this.setState({
             text: event.target.value
         })
+    }
+
+    validateInput = () => {
+        let isError = false
+        const errors = {
+            titleErrorText: '',
+            isTitleError: false,
+            imageErrorText: '',
+            isErrorImage: false
+        }
+        if(this.state.title === ""){
+            isError = true
+            errors.titleErrorText = 'It needs a title'
+            errors.isTitleError = true
+        }
+
+        if(this.state.selectedFile === null){
+            isError = true
+            errors.imageErrorText = 'It needs an image'
+            errors.isErrorImage = true
+        }
+        
+        if(isError){
+            this.setState({
+                ...this.state,
+                ...errors,
+            })
+        }
+        return isError
     }
 
     entryUploadHandler = () => {
@@ -102,16 +94,13 @@ export default class EntryInput extends React.Component{
                 redirect:true
             })
         }
-
     }
-
-    
 
     renderRedirect = () => {
         if (this.state.redirect) {
-          return <Redirect to='/' />
+            return <Redirect to='/' />
         }
-      }
+    }
 
     render(){
         const textfieldStyle = {
@@ -119,74 +108,59 @@ export default class EntryInput extends React.Component{
             marginTop: "1em"
         }
 
-        const formStyle = {
-            width:'100%',
-
-        }
-
-        const hide = {
-            display: "none"
-        }
-
         return(
             <>
-            {this.renderRedirect()}
-            <form style = {formStyle}>
-                
-                <TextField
-                    variant="outlined"
-                    required label="Title" 
-                    color="secondary"
-                    style={textfieldStyle}
-                    error = {this.state.isTitleError}
-                    onChange = {this.selectedTitleHandler}
-                    helperText = {this.state.titleErrorText}
-                    inputProps={{
-                        maxLength: 30,
-                    }}
-                />
+                {this.renderRedirect()}
+                <form style = {{width: '100%'}}>          
+                    <TextField
+                        variant="outlined"
+                        required label="Title, max 30 characters" 
+                        color="secondary"
+                        style={textfieldStyle}
+                        error = {this.state.isTitleError}
+                        onChange = {this.selectedTitleHandler}
+                        helperText = {this.state.titleErrorText}
+                        inputProps = {{maxLength: 30}}
+                    />
                     <input 
                         required accept="image/png, image/jpeg" 
                         type="file" 
                         id="icon-button-file"
-                        style = {hide}
-                        onChange = {this.selectedFileHandler}
-                        
+                        style = {{display: 'none'}}
+                        onChange = {this.selectedFileHandler}                      
                     />
                     <label htmlFor="icon-button-file">
                         
                         <IconButton 
                             color="secondary"
                             aria-label="upload picture" 
-                            component="span">
-                        <PhotoCamera 
-                        style = {{fontSize: "4rem"}}/>
+                            component="span"
+                        >
+                            <PhotoCamera 
+                            style = {{fontSize: "4rem", marginTop: '1rem'}}/>
                         </IconButton>
                         <p style = {{color: 'red'}}>{this.state.isImageError? (""):(this.state.imageErrorText)}</p>
                         <p>{this.state.selectedFile? (this.state.selectedFile.name) : ("")}</p>
                     </label>
-                <TextField
-                    label= "Text, max 140 characters"
-                    multiline
-                    rows="4"
-                    variant="outlined"
-                    style={textfieldStyle}
-                    color="secondary"
-                    inputProps={{
-                        maxLength: 140,
-                    }}
-                    onChange = {this.selectedTextHandler}
-                />                           
-                <Button 
-                    variant="contained" 
-                    color="secondary"
-                    style = {{width: '100%'}}
-                    onClick = {this.entryUploadHandler}>
-                    submit
-                </Button>
-            </form>
+                    <TextField
+                        label= "Text, max 140 characters"
+                        multiline
+                        rows="4"
+                        variant="outlined"
+                        style={textfieldStyle}
+                        color="secondary"
+                        inputProps = {{maxLength: 140}}
+                        onChange = {this.selectedTextHandler}
+                    />                           
+                    <Button 
+                        variant="contained" 
+                        color= "secondary"
+                        style = {{width: '100%'}}
+                        onClick = {this.entryUploadHandler}>
+                        submit
+                    </Button>
+                </form>
             </>
-
         )
     }
 }

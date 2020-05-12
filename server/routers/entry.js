@@ -23,14 +23,10 @@ const fileFilter = (req, file, cb) => {
         //reject file
         cb(new Error('To big or wrong format'), false)
     }
-
 }
 
 const upload = multer({
     storage: storage, 
-    limits: {
-        fileSize: 1024 * 1024 * 4
-    }, 
     fileFilter: fileFilter
     })
 
