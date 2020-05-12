@@ -120,14 +120,8 @@ export default class EntryInput extends React.Component{
         }
 
         const formStyle = {
-            width:'100%'
-        }
+            width:'100%',
 
-        const fileUploadStyle = {
-            
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
         }
 
         const hide = {
@@ -137,15 +131,19 @@ export default class EntryInput extends React.Component{
         return(
             <>
             {this.renderRedirect()}
-            <FormControl style = {formStyle}>
+            <form style = {formStyle}>
                 
-                <TextField 
+                <TextField
+                    variant="outlined"
                     required label="Title" 
                     color="secondary"
                     style={textfieldStyle}
                     error = {this.state.isTitleError}
                     onChange = {this.selectedTitleHandler}
-                    helperText = {this.state.titleErrorText} 
+                    helperText = {this.state.titleErrorText}
+                    inputProps={{
+                        maxLength: 30,
+                    }}
                 />
                     <input 
                         required accept="image/png, image/jpeg" 
@@ -181,11 +179,12 @@ export default class EntryInput extends React.Component{
                 />                           
                 <Button 
                     variant="contained" 
-                    color="secondary" 
+                    color="secondary"
+                    style = {{width: '100%'}}
                     onClick = {this.entryUploadHandler}>
                     submit
                 </Button>
-            </FormControl>
+            </form>
             </>
 
         )
