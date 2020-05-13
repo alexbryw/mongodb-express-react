@@ -80,6 +80,7 @@ export default class EntryInput extends React.Component{
         
             fetch(`http://localhost:9000/api/entry/`,{
                 method: 'POST',
+                credentials: 'include',
                 body: fd
             })
             .then(response => response.json())

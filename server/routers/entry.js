@@ -181,10 +181,10 @@ router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
 })
 
 function secureRouteUserOrAdmin(req, res, next){
-    console.log(req.params.id)
-    console.log(req.session.username, " username")
-    console.log(req.session.role , " role")
-    console.log("from secure route user or admin entry")
+    // console.log(req.params.id)
+    // console.log(req.session.username, " username")
+    // console.log(req.session.role , " role")
+    // console.log("from secure route user or admin entry")
     if(!req.session.username){
         return res.status(401).json({msg: "Login to continue."})
     }
@@ -197,6 +197,8 @@ function secureRouteUserOrAdmin(req, res, next){
                 console.log("Pass - ")
                 next()
                 // res.status(404).json({msg: "test pass"})
+            } else {
+                res.status(401).json({msg: "Wrong user - login with correct user or admin account."})
             }
         } else {
             res.status(404).json({msg: "Could not find entry."})
@@ -213,7 +215,7 @@ function secureRouteAnyUser(req, res, next){
     
     if(req.body.username === req.session.username || req.session.role === "admin")
 
-    console.log("Pass - username found " , req.session.username)
+    // console.log("Pass - username found " , req.session.username)
     next()
     // res.status(404).json({msg: "testing any user"})
 
