@@ -28,10 +28,9 @@ export default class UserList extends React.Component{
 
     async callAPI(){
         fetch("http://localhost:9000/api/user")
-        .then((response) => { return response.json()
-        }).then((data) => {
-          this.setState({apiResponse: data})
-        })
+        .then((response) => { return response.json()})
+        .then((data) => {this.setState({apiResponse: data})})
+        .catch(error => console.error('Error:', error))
     }
     
     componentDidMount(){
@@ -39,7 +38,6 @@ export default class UserList extends React.Component{
     }
 
     render(){
-
         const users = this.state.apiResponse;
         if(this.state.apiResponse === undefined){
             return <div></div>

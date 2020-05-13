@@ -1,17 +1,10 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import EntryCardToggle from './EntryCardToggle';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 export default function EntryCard(props) {
-
-
-
-    let entryImageSize = {   
-        width:'95vw',
-        height:'95vw',
-    }
 
     let entryWidth = {   
         width:'95vw',
@@ -23,11 +16,6 @@ export default function EntryCard(props) {
     }
 
     if(useMediaQuery('(min-width:37em)')){
-        entryImageSize = {
-            width:'35em', 
-            height:'35em'
-        }
-
         entryWidth = {   
             width:'35em',
         }
