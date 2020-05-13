@@ -23,7 +23,11 @@ export default class Enties extends Component {
                         alignItems="center"
                     >
                     {entries.map((entry) =>
-                        <EntryCard entryData={ entry } key={entry._id}/>
+                        <EntryCard 
+                            entryData={ entry } 
+                            key={entry._id} 
+                            refreshEntries={this.props.refreshEntries}
+                        />
                     )}
                     
                     </Grid>

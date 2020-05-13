@@ -2,31 +2,49 @@ import React from 'react';
 import './App.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Layout from './components/Layout';
-import Theme from './MuiTheme'
+import Theme from './MuiTheme';
+
+
 
 class App extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      apiResponse: []
+      apiResponse: [],
+      refresh: false
     }
   }
 
   async callAPI(){
-    let response = await fetch("http://localhost:9000/api/entry/")
-    let data = await response.json()
-    this.setState({apiResponse: data})
+    fetch("http://localhost:9000/api/entry/")
+    .then((response) => { return response.json()
+    }).then((data) => {
+      this.setState({apiResponse: data})
+    })
   }
 
   componentDidMount(){
     this.callAPI()
   }
 
+  refreshEntries = () => {
+    fetch("http://localhost:9000/api/entry/")
+    .then((response) => { return response.json()
+    }).then((data) => {
+      this.setState({
+        apiResponse: data,
+      })
+    })
+  }
+
   render(){
     return (
       <ThemeProvider theme={Theme}>
         <div className="App">
-          <Layout entryData={this.state.apiResponse}/>
+          <Layout 
+            entryData={this.state.apiResponse}
+            refreshEntries={this.refreshEntries}
+          />
         </div>
       </ThemeProvider>
     );

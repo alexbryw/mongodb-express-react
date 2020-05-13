@@ -35,7 +35,10 @@ export default function EntryCard(props) {
     return (
         <Grid item>
             <Card style={{...cardStyle, ...entryWidth}}>
-                <EntryCardToggle entryData={ props.entryData }/>
+                <EntryCardToggle 
+                    entryData={ props.entryData }
+                    refreshEntries={props.refreshEntries}
+                />
             </Card>
         </Grid>
   );
