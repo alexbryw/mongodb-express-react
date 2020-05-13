@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {Redirect} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 export default class EntryInput extends React.Component{
     constructor(props){
@@ -88,11 +89,12 @@ export default class EntryInput extends React.Component{
                     console.log(error.response.data)
                 }
             })
-            .then(response => console.log('Success:', JSON.stringify(response))) 
-            
-            this.setState({
+            .then(
+                this.props.refreshEntries(),
+                this.props.refreshEntries(),
+                this.setState({
                 redirect:true
-            })
+            }))
         }
     }
 
