@@ -16,8 +16,7 @@ export default class UserLogin extends React.Component{
             username: "",
             password: "",
             errorMessage: "",
-            redirect:false,
-            isErrorMessage:false
+            redirect:false
         }
     }
 
@@ -60,8 +59,6 @@ export default class UserLogin extends React.Component{
                 })
             }
             else{
-/*                 this.props.refreshEntries()
-                this.props.refreshEntries() */
                 this.setState({
                 redirect:true
                 })
@@ -85,58 +82,58 @@ export default class UserLogin extends React.Component{
         return (
             <>
              {this.renderRedirect()}
-            <CardContent>
-                <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                >   
-                <Link to="/">
-                    <IconButton color="secondary" size="small">
-                        <ArrowBackIcon />
-                    </IconButton>
-                </Link>
-                <Typography variant="h5" component="h2">
-                    Log in
-                </Typography>
-                    <div>
-                        
-                    </div>
-                </Grid>
-                <form>
-                    <TextField
-                        required
-                        label="User"
-                        defaultValue=""
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                        onChange = {this.handleUsername}
-                    />
-                    <TextField
-                        required
-                        label="Password"
-                        defaultValue=""
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                        type="password"
-                        onChange = {this.handlePassword}
-                    />
-                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
-                    <Button 
-                        variant="outlined" 
-                        color="secondary" 
-                        style={textfieldStyle}
-                        onClick = {this.sendLogInRequest}
-                    >
+                <CardContent>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                    >   
+                    <Link to="/">
+                        <IconButton color="secondary" size="small">
+                            <ArrowBackIcon />
+                        </IconButton>
+                    </Link>
+                    <Typography variant="h5" component="h2">
                         Log in
-                    </Button>
-                </form>
-            </CardContent>
+                    </Typography>
+                        <div>
+                            
+                        </div>
+                    </Grid>
+                    <form>
+                        <TextField
+                            required
+                            label="User"
+                            defaultValue=""
+                            variant="outlined"
+                            fullWidth
+                            color="secondary"
+                            style={textfieldStyle}
+                            onChange = {this.handleUsername}
+                        />
+                        <TextField
+                            required
+                            label="Password"
+                            defaultValue=""
+                            variant="outlined"
+                            fullWidth
+                            color="secondary"
+                            style={textfieldStyle}
+                            type="password"
+                            onChange = {this.handlePassword}
+                        />
+                        <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
+                        <Button 
+                            variant="outlined" 
+                            color="secondary" 
+                            style={textfieldStyle}
+                            onClick = {this.sendLogInRequest}
+                        >
+                            Log in
+                        </Button>
+                    </form>
+                </CardContent>
             </>
         );
     }

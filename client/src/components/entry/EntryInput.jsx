@@ -104,16 +104,13 @@ export default class EntryInput extends React.Component{
                     })
                 }
                 console.log(JSON.stringify(response))
-            })
-            
-            
-            
+            })                      
         }
     }
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/' />
+            return <Redirect to='/'/>
         }
     }
 
@@ -125,7 +122,7 @@ export default class EntryInput extends React.Component{
 
         return(
             <>
-                {this.renderRedirect()}
+            {this.renderRedirect()}
                 <form style = {{width: '100%'}}>          
                     <TextField
                         variant="outlined"
@@ -144,8 +141,7 @@ export default class EntryInput extends React.Component{
                         style = {{display: 'none'}}
                         onChange = {this.selectedFileHandler}                      
                     />
-                    <label htmlFor="icon-button-file">
-                        
+                    <label htmlFor="icon-button-file">                      
                         <IconButton 
                             color="secondary"
                             aria-label="upload picture" 
