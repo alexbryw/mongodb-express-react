@@ -20,6 +20,7 @@ export default class UserRegister extends React.Component{
 /*             isPasswordError: false,
             PasswordErrorText: '',
             redirect: false */
+            errorMessage: ""
         }
     }
 
@@ -35,26 +36,32 @@ export default class UserRegister extends React.Component{
         })
     }
 
-    sendRegistrationRequest = () => {
+    sendRegistrationRequest = async() => {
         let data = {
             "username": this.state.username,
             "password": this.state.password
         }
-        console.log('button pressed')
-        fetch(`http://localhost:9000/api/user/`,{
+        await fetch(`http://localhost:9000/api/user/`,{
             method: 'POST',
             headers: {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .catch(error => {
-            if(error.response) { 
-                console.log(error.response.data)
-            }
+        .then((response) => response.json())
+        .catch((err) => {
+
+                console.log(err)
+
         })
-        .then(response => console.log('Success:', JSON.stringify(response))) 
+        .then((response) => {
+                if(!response.ok){
+                    this.setState({
+                        errorMessage: response.msg
+                    })
+                }
+                console.log(JSON.stringify(response))
+        })
     }
 
     render(){
@@ -103,6 +110,7 @@ export default class UserRegister extends React.Component{
                         type="password"
                         onChange = {this.handlePassword}
                     />
+                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
                     <Button variant="outlined" color="secondary" style={textfieldStyle} onClick = {this.sendRegistrationRequest}>
                         Register
                     </Button>
