@@ -212,12 +212,15 @@ function secureRouteAnyUser(req, res, next){
         console.log("username not found in cookie.")
         return res.status(401).json({msg: "Login to continue."})
     }
-    
-    if(req.body.username === req.session.username || req.session.role === "admin")
+    console.log(req.body.username," req.body.username") // empty body? no username?
+    console.log(req.session.username, " session cookie username")
+    if(req.body.username === req.session.username || req.session.role === "admin"){
+        console.log("Pass - username found " , req.session.username)
+        next()
+    } else {
+        res.status(401).json({msg: "Wrong user - log in with correct user or admin."})
+    }
 
-    // console.log("Pass - username found " , req.session.username)
-    next()
-    // res.status(404).json({msg: "testing any user"})
 
 }
 
