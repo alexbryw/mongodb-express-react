@@ -1,18 +1,36 @@
 
-POST http://localhost:9000/api/entry
+DELETE http://localhost:9000/api/entry/5ebbe6e93052f2395856bd0d
+
+###
+
+PUT http://localhost:9000/api/entry/5ebbe6e93052f2395856bd0d
+
+
+###
+
+POST http://localhost:9000/api/entry/
 Content-Type: application/json
 
 {
-    "title": "title abc",
-    "imgUrl": "http://imgur.com/pic1"
+    "username": "Admin"
 }
 
 ###
 
-PUT http://localhost:9000/api/entry
+POST http://localhost:9000/api/user/login
 Content-Type: application/json
 
 {
-    "title": "title abc",
-    "imgUrl": "http://imgur.com/pic2"
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+
+POST http://localhost:9000/api/user/login
+Content-Type: application/json
+
+{
+    "username": "Lex",
+    "password": "123456"
 }

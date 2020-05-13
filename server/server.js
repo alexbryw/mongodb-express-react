@@ -9,10 +9,11 @@ const userRoute = require('./routers/user')
 const entryRoute = require('./routers/entry')
 const loginRoute = require('./routers/login')
 
-app.use(cors())
+// app.use(cors())
+app.use(cors({ credentials: true, origin: ['http://localhost:3000']}))
 app.use(cookieSession({
     secret: 'secretKey',
-    maxAge: 1000 * 15, //15 sec cookie timeout.
+    maxAge: 1000 * 60 * 1, //1 min cookie timeout.
     sameSite: 'strict',
     httpOnly: true,
     secure: false

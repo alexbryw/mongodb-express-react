@@ -44,8 +44,10 @@ export default class UserLogin extends React.Component{
         fetch(`http://localhost:9000/api/user/login`,{
             method: 'POST',
             headers: {
+                Accept: 'application/json',
                 "Content-Type" : "application/json"
             },
+            credentials: 'include',
             body: JSON.stringify(data)
         })
         .then(response => response.json())
