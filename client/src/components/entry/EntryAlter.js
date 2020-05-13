@@ -34,14 +34,15 @@ export default class EntryAlter extends React.Component{
             if((this.state.title === "")){
                 if(this.state.title === ""){
                     this.setState({
-                        isTitleError: this.props.entryData.title
+                        isTitleError: true
                     })
                 }
             }
             let updatedEntry = {
                 title: this.state.title,
                 text: this.state.text,
-                image: this.props.entryData.image
+                image: this.props.entryData.image,
+                isTitleError: false
             }
         
             fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{
@@ -81,6 +82,7 @@ export default class EntryAlter extends React.Component{
                     defaultValue={this.props.entryData.title}
                     variant="outlined" 
                     fullWidth
+                    error={this.state.isTitleError}
                     />
                 <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>
                 <TextField
