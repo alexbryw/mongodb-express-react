@@ -29,7 +29,7 @@ router.post('/api/user', async function (req, res) {
         user.save(function (err, user) {
             if(err){//db error, duplicate name or bad password.
                 res.status(400).send(
-                {msg: err.message})
+                {msg: 'Username already taken'})
             }
             res.status(201).json(user)//201 OK created and send back new user.
         })

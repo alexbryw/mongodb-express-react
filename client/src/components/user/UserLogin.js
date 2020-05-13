@@ -48,21 +48,6 @@ export default class UserLogin extends React.Component{
             body: JSON.stringify(data)
         })
         .then((response) => response.json())
-            
-/*              if(!response.ok){
-                this.setState({
-                    isErrorMessage: true
-                })
-            }
-            else{
-                this.props.refreshEntries()
-                this.props.refreshEntries()
-                this.setState({
-                redirect:true
-                })            
-            } */
-            
-        
         .catch(err => {
             if(err.response) { 
                 console.log(err)
@@ -75,8 +60,8 @@ export default class UserLogin extends React.Component{
                 })
             }
             else{
-                this.props.refreshEntries()
-                this.props.refreshEntries()
+/*                 this.props.refreshEntries()
+                this.props.refreshEntries() */
                 this.setState({
                 redirect:true
                 })
