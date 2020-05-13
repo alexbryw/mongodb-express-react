@@ -95,10 +95,10 @@ router.get('/api/entry/:id', (req, res, next) => {
 
 //Add entry.
 router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (req, res, next) {
-    //res.json({msg:"from POST /api/entry"})
+    console.log(req.session.username, " from POST entry.")
     const entry = new Entry({
         _id: new  mongoose.Types.ObjectId(),
-        username: req.body.username,
+        username: req.session.username, //Changed to cookie username of logged in user.
         title: req.body.title,
         image: req.file.path,
         text: req.body.text,
@@ -212,9 +212,9 @@ function secureRouteAnyUser(req, res, next){
         console.log("username not found in cookie.")
         return res.status(401).json({msg: "Login to continue."})
     }
-    console.log(req.body.username," req.body.username") // empty body? no username?
-    console.log(req.session.username, " session cookie username")
-    if(req.body.username === req.session.username || req.session.role === "admin"){
+    // console.log(req.body.username," req.body.username") // empty body? no username?
+    // console.log(req.session.username, " session cookie username")
+    if(req.session.username || req.session.role === "admin"){
         console.log("Pass - username found " , req.session.username)
         next()
     } else {
