@@ -146,9 +146,9 @@ router.put('/api/entry/:id',secureRouteUserOrAdmin, upload.single('image'), asyn
         })
     } catch(err){
         console.log(err)
-        res.status(500).json({
-            error: err
-        })
+        res.status(500).send(
+            {msg: "Could not update entry"}
+        )
     }
 })
 
@@ -169,7 +169,7 @@ router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
                 }
             })
         })
-        res.status(200).send({msg: 'It is now gone forever'})
+        res.status(200).send('It is now gone forever')
     }
     catch(err){
         console.log(err.message)

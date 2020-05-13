@@ -84,10 +84,16 @@ export default class EntryInput extends React.Component{
                 credentials: 'include',
                 body: fd
             })
+            .then((response) => response.json())
+            .catch(error => {
+                if(error.response) { 
+                    console.log(error.response.data)
+                }
+            })
             .then((response) => {
-                if(!response.ok){
+                if(response.msg){
                     this.setState({
-                        errorMessage: response.statusText
+                        errorMessage: response.msg
                     })
                 }
                 else{
@@ -96,14 +102,8 @@ export default class EntryInput extends React.Component{
                     this.setState({
                     redirect:true
                     })
-                    return response.json()
                 }
                 console.log(JSON.stringify(response))
-            })
-            .catch(error => {
-                if(error.response) { 
-                    console.log(error.response.data)
-                }
             })
             
             
