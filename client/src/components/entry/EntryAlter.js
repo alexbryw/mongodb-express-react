@@ -50,8 +50,13 @@ export default class EntryAlter extends React.Component{
             })
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
-            .then(this.props.refreshEntries()) 
-        
+            .then(
+                this.props.refreshEntries(),
+                this.props.refreshEntries(),
+                this.props.editMode()
+
+                ) 
+
     }
 
     render(){

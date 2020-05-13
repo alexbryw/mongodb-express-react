@@ -31,9 +31,7 @@ class App extends React.Component {
     fetch("http://localhost:9000/api/entry/")
     .then((response) => { return response.json()
     }).then((data) => {
-      this.setState({
-        apiResponse: data,
-      })
+      this.setState({apiResponse: data})
     })
   }
 
