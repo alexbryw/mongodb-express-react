@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {Redirect} from 'react-router-dom'
-import {withRouter} from 'react-router-dom'
 
 export default class EntryInput extends React.Component{
     constructor(props){
