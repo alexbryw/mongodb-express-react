@@ -17,7 +17,8 @@ export default class EntryInput extends React.Component{
             titleErrorText: '',
             isImageError: false,
             imageErrorText: '',
-            redirect: false
+            redirect: false,
+            errorMessage: ""
         }
     }
 
@@ -83,18 +84,32 @@ export default class EntryInput extends React.Component{
                 credentials: 'include',
                 body: fd
             })
-            .then(response => response.json())
+            .then((response) => {
+                console.log(response)
+                if(!response.ok){
+                    this.setState({
+                        errorMessage: response.statusText
+                    })
+                }
+                else{
+                    console.log('entered here')
+                    this.props.refreshEntries()
+                    this.props.refreshEntries()
+                    this.setState({
+                    redirect:true
+                    })
+                    return response.json()
+                }
+                console.log(JSON.stringify(response))
+            })
             .catch(error => {
                 if(error.response) { 
                     console.log(error.response.data)
                 }
             })
-            .then(
-                this.props.refreshEntries(),
-                this.props.refreshEntries(),
-                this.setState({
-                redirect:true
-            }))
+            
+            
+            
         }
     }
 
@@ -154,7 +169,8 @@ export default class EntryInput extends React.Component{
                         color="secondary"
                         inputProps = {{maxLength: 140}}
                         onChange = {this.selectedTextHandler}
-                    />                           
+                    />
+                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>                         
                     <Button 
                         variant="contained" 
                         color= "secondary"
