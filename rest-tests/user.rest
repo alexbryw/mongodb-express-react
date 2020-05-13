@@ -6,8 +6,8 @@ POST http://localhost:9000/api/user
 Content-Type: application/json
 
 {
-    "username": "Fluffy",
-    "password": "PinkFluffyUnicorn"
+    "username": "Schampoo",
+    "password": "123"
 }
 
 ###

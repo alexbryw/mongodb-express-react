@@ -8,18 +8,13 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
 export default class UserLogin extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             username: "",
-/*             isusernameError: false,
-            titleErrorText: '', */
             password: "",
-/*             isPasswordError: false,
-            PasswordErrorText: '',
-            redirect: false */
+            errorMessage: ""
         }
     }
 
@@ -40,7 +35,6 @@ export default class UserLogin extends React.Component{
             "username": this.state.username,
             "password": this.state.password
         }
-        console.log('button pressed')
         fetch(`http://localhost:9000/api/user/login`,{
             method: 'POST',
             headers: {
@@ -51,12 +45,19 @@ export default class UserLogin extends React.Component{
             body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .catch(error => {
-            if(error.response) { 
-                console.log(error.response.data)
+        .catch(err => {
+            if(err.response) { 
+                console.log(err)
             }
         })
-        .then(response => console.log('Success:', JSON.stringify(response))) 
+        .then((response) => {
+            if(!response.ok){
+                this.setState({
+                    errorMessage: response.msg
+                })
+            }
+            console.log(JSON.stringify(response))
+        })
     }
 
     render(){
@@ -107,6 +108,7 @@ export default class UserLogin extends React.Component{
                         type="password"
                         onChange = {this.handlePassword}
                     />
+                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
                     <Button 
                         variant="outlined" 
                         color="secondary" 

@@ -37,7 +37,6 @@ router.get('/api/entry', (req, res, next) => {
     .select('_id username title text image')
     .exec()
     .then(docs => {
-        console.log('from getting all the entries', docs)
         const response = {
             count: docs.length,
             entries: docs.map(doc => {
@@ -121,9 +120,9 @@ router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (
     })
     .catch(err => {
         console.log(err)
-        res.status(500).json({
-            message: "Could not upload entry"
-        })
+        res.status(500).send(
+            "Could not upload entry"
+        )
     })
 
 })
