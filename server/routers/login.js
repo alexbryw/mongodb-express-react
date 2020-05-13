@@ -12,6 +12,7 @@ router.post('/api/user/login', async function (req, res) {
 
     const userFound = await userRoute.findOne({username: req.body.username})
     if(userFound) {
+        console.log(req.session.sessionKey)
         console.log(req.session.username)
         if(req.session.username != null){
             return res.status(400).json({msg:"User already logged in."})

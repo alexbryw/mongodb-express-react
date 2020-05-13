@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import EntryCardToggle from './EntryCardToggle';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -34,7 +34,10 @@ export default function EntryCard(props) {
     return (
         <Grid item>
             <Card style={{...cardStyle, ...entryWidth}}>
-                <EntryCardToggle entryData={ props.entryData }/>
+                <EntryCardToggle 
+                    entryData={ props.entryData }
+                    refreshEntries={props.refreshEntries}
+                />
             </Card>
         </Grid>
   );

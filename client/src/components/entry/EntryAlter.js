@@ -1,6 +1,7 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 export default class EntryAlter extends React.Component{
     constructor(props){
@@ -8,6 +9,7 @@ export default class EntryAlter extends React.Component{
         this.state = {
             title: this.props.entryData.title,
             text: this.props.entryData.text,
+            isTitleError: false
         }
     }
 
@@ -28,12 +30,38 @@ export default class EntryAlter extends React.Component{
 
     entryUploadHandler = () => {
             if((this.state.title === "")){
-                if(this.state.title === ""){
-                    this.setState({
-                        isTitleError: this.props.entryData.title
-                    })
+                this.setState({
+                    isTitleError: true
+                })   
+            } else {
+
+                this.setState({
+                    isTitleError: false
+                })  
+
+                let updatedEntry = {
+                    title: this.state.title,
+                    text: this.state.text,
+                    image: this.props.entryData.image,
                 }
+            
+                fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify(updatedEntry)
+                })
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error))
+                .then(
+                    this.props.refreshEntries(),
+                    this.props.refreshEntries(),
+                    this.props.editMode()
+    
+                ) 
             }
+
             let updatedEntry = {
                 title: this.state.title,
                 text: this.state.text,
@@ -75,6 +103,7 @@ export default class EntryAlter extends React.Component{
                     defaultValue={this.props.entryData.title}
                     variant="outlined" 
                     fullWidth
+                    error={this.state.isTitleError}
                     />
                 <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>
                 <TextField
