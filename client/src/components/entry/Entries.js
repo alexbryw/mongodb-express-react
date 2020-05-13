@@ -9,10 +9,11 @@ export default class Enties extends Component {
     }
     
     render() {
-        const entries = this.props.entryData.entries
+        const entries = this.props.entryData.entries;
         if(typeof entries === "function"){
             return (<div></div>) //nicer loading here
         } else {
+            entries.reverse()
             return (
                 <div>
                     <Grid
@@ -22,7 +23,11 @@ export default class Enties extends Component {
                         alignItems="center"
                     >
                     {entries.map((entry) =>
-                        <EntryCard entryData={ entry } key={entry._id}/>
+                        <EntryCard 
+                            entryData={ entry } 
+                            key={entry._id} 
+                            refreshEntries={this.props.refreshEntries}
+                        />
                     )}
                     
                     </Grid>
