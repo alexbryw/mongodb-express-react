@@ -1,0 +1,23 @@
+POST http://localhost:3000/api/entry
+Content-Type: multipart/form-data; boundary=FormDataRow
+
+--FormDataRow
+Content-Disposition: form-data; name="username"; filename="earth.jpg"
+Content-Type: json
+
+--FormDataRow
+Content-Disposition: form-data; name="image"; filename="earth.jpg"
+Content-Type: image/jpeg
+
+--FormDataRow
+Content-Disposition: form-data; name="image"; filename="earth.jpg"
+Content-Type: image/jpeg
+
+< ./earth.jpg
+
+--FormDataRow
+
+Content-Disposition: form-data; name="image"; filename="earth.jpg"
+Content-Type: image/jpeg
+
+--FormDataRow--
