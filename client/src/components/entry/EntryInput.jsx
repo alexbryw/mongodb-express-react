@@ -68,7 +68,7 @@ export default class EntryInput extends React.Component{
         return isError
     }
 
-    entryUploadHandler = () => {
+    handleEntryUpload = () => {
         const err = this.validateInput()
 
         if(!err){
@@ -135,9 +135,10 @@ export default class EntryInput extends React.Component{
                             color="secondary"
                             aria-label="upload picture" 
                             component="span"
+                            style = {{ marginTop: '1rem' }}
                         >
                             <PhotoCamera 
-                            style = {{fontSize: "4rem", marginTop: '1rem'}}/>
+                            style = {{fontSize: "4rem"}}/>
                         </IconButton>
                         <p style = {{color: 'red'}}>{this.state.isImageError? (""):(this.state.imageErrorText)}</p>
                         <p>{this.state.selectedFile? (this.state.selectedFile.name) : ("")}</p>
@@ -156,7 +157,7 @@ export default class EntryInput extends React.Component{
                         variant="contained" 
                         color= "secondary"
                         style = {{width: '100%'}}
-                        onClick = {this.entryUploadHandler}>
+                        onClick = {this.handleEntryUpload}>
                         submit
                     </Button>
                 </form>

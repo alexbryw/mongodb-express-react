@@ -1,10 +1,6 @@
 import React from 'react'
-import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera'; 
-
 
 export default class EntryAlter extends React.Component{
     constructor(props){
@@ -54,8 +50,6 @@ export default class EntryAlter extends React.Component{
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', JSON.stringify(response))) 
-        
-
     }
 
     render(){

@@ -9,59 +9,106 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
-export default function UserRegister() {
-
-    const textfieldStyle = {
-        width: "80%",
-        marginTop: "1em"
+export default class UserRegister extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            username: "",
+/*             isusernameError: false,
+            titleErrorText: '', */
+            password: "",
+/*             isPasswordError: false,
+            PasswordErrorText: '',
+            redirect: false */
+        }
     }
 
-  return (
-    <CardContent>
-        <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-        >   
-        <Link to="/">
-            <IconButton color="secondary" size="small">
-                <ArrowBackIcon />
-            </IconButton>
-        </Link>
-        <Typography variant="h5" component="h2">
-            Register
-        </Typography>
-            <div>
-                
-            </div>
-        </Grid>
-        <form>
-            <TextField
-                required
-                id="outlined-required"
-                label="User"
-                defaultValue=""
-                variant="outlined"
-                fullWidth
-                color="secondary"
-                style={textfieldStyle}
-            />
-            <TextField
-                required
-                id="outlined-required"
-                label="Password"
-                defaultValue=""
-                variant="outlined"
-                fullWidth
-                color="secondary"
-                style={textfieldStyle}
-                type="password"
-            />
-            <Button variant="outlined" color="secondary" style={textfieldStyle}>
-                Register
-            </Button>
-        </form>
-    </CardContent>
-  );
+    handleUsername = event => {
+        this.setState({
+            username: event.target.value
+        })
+    }
+
+    handlePassword = event => {
+        this.setState({
+            password: event.target.value
+        })
+    }
+
+    sendRegistrationRequest = () => {
+        let data = {
+            "username": this.state.username,
+            "password": this.state.password
+        }
+        console.log('button pressed')
+        fetch(`http://localhost:9000/api/user/`,{
+            method: 'POST',
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .catch(error => {
+            if(error.response) { 
+                console.log(error.response.data)
+            }
+        })
+        .then(response => console.log('Success:', JSON.stringify(response))) 
+    }
+
+    render(){
+        const textfieldStyle = {
+            width: "80%",
+            marginTop: "1em"
+        }
+    
+        return (
+            <CardContent>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >   
+                <Link to="/">
+                    <IconButton color="secondary" size="small">
+                        <ArrowBackIcon />
+                    </IconButton>
+                </Link>
+                <Typography variant="h5" component="h2">
+                    Register
+                </Typography>
+                    <div>
+                        
+                    </div>
+                </Grid>
+                <form>
+                    <TextField
+                        required
+                        label="User"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        style={textfieldStyle}
+                        onChange = {this.handleUsername}
+                    />
+                    <TextField
+                        required
+                        label="Password"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        style={textfieldStyle}
+                        type="password"
+                        onChange = {this.handlePassword}
+                    />
+                    <Button variant="outlined" color="secondary" style={textfieldStyle} onClick = {this.sendRegistrationRequest}>
+                        Register
+                    </Button>
+                </form>
+            </CardContent>
+        );
+
+    }
 }
