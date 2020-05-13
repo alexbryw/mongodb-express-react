@@ -1,36 +1,44 @@
-
-DELETE http://localhost:9000/api/entry/5ebbe6e93052f2395856bd0d
-
-###
-
-PUT http://localhost:9000/api/entry/5ebbe6e93052f2395856bd0d
-
+GET http://localhost:9000/api/entry
 
 ###
 
-POST http://localhost:9000/api/entry/
+POST http://localhost:9000/api/entry
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+//Content-Type: application/json
+
+Fluff
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Sent from REST
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="Ninja10.jpg"
+Content-Type: image/jpeg
+
+< ./Ninja10.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+This is a default picture
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+PUT http://localhost:9000/api/entry/5ebaee3793e3763f3002c3f2
 Content-Type: application/json
 
 {
-    "username": "Admin"
+    "title": "Måla Lisa",
+    "image": "uploads\\1589308982977LisasFirstKrita.png",
+    "text": "Made by Lisa"
 }
 
 ###
 
-POST http://localhost:9000/api/user/login
-Content-Type: application/json
-
-{
-    "username": "admin",
-    "password": "admin"
-}
-
-###
-
-POST http://localhost:9000/api/user/login
-Content-Type: application/json
-
-{
-    "username": "Lex",
-    "password": "123456"
-}
+DELETE http://localhost:9000/api/entry/5ebbb3021f21dd1dc0d80b6d
