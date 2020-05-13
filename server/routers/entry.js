@@ -207,6 +207,7 @@ function secureRouteUserOrAdmin(req, res, next){
 
 function secureRouteAnyUser(req, res, next){
     if(!req.session.username){
+        console.log("username not found in cookie.")
         return res.status(401).json({msg: "Login to continue."})
     }
     

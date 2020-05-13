@@ -12,7 +12,7 @@ const loginRoute = require('./routers/login')
 app.use(cors())
 app.use(cookieSession({
     secret: 'secretKey',
-    maxAge: 1000 * 45, //45 sec cookie timeout.
+    maxAge: 1000 * 60, //60 sec cookie timeout.
     sameSite: 'strict',
     httpOnly: true,
     secure: false
