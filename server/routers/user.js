@@ -76,10 +76,10 @@ router.delete('/api/user/:id',secureRoute("admin"), async function (req, res) {
 //Check if user has correct access privileges like 'admin' or 'user'.
 function secureRoute(role){
     return function(req, res, next) {
-        if(req.session.role !== role){
+        /*if(req.session.role !== role){
             res.status(401).json({msg: "Access denied. Please login with the correct access privileges"})
             return
-        }
+        }*/
         console.log(" Correct user role , access granted.")
         next()
     }

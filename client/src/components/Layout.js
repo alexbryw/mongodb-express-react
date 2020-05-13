@@ -4,6 +4,7 @@ import Entries from './entry/Entries';
 import User from './user/User';
 import AddEntry from './AddEntry';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AdminPage from './admin/AdminPage';
 
 export default class Layout extends Component {
     constructor(props) {
@@ -30,6 +31,9 @@ export default class Layout extends Component {
                                 entryData={this.props.entryData}
                                 refreshEntries={this.props.refreshEntries}
                             />
+                        </Route>
+                        <Route path="/admin">
+                            <AdminPage/>
                         </Route>
                         <Route path="/user">
                             <User/>
