@@ -23,14 +23,10 @@ const fileFilter = (req, file, cb) => {
         //reject file
         cb(new Error('To big or wrong format'), false)
     }
-
 }
 
 const upload = multer({
     storage: storage, 
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    }, 
     fileFilter: fileFilter
     })
 
@@ -62,9 +58,9 @@ router.get('/api/entry', (req, res, next) => {
     })
     .catch(err => {
         console.log(err)
-        res.status(404).json({
-            message: 'No entries found'
-        })
+        res.status(404).send(
+             'No entries found'
+        )
     })
 })
 
@@ -87,7 +83,7 @@ router.get('/api/entry/:id', (req, res, next) => {
                 }
             })
         } else {
-            res.status(404).json({message: ' Did not find specific entry '})
+            res.status(404).send(' Did not find specific entry ')
         }
     })
     .catch(err => {
@@ -126,7 +122,7 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
     .catch(err => {
         console.log(err)
         res.status(500).json({
-            error: err
+            message: "Could not upload entry"
         })
     })
 
