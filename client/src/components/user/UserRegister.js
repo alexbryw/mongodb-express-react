@@ -8,18 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
 export default class UserRegister extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             username: "",
-/*             isusernameError: false,
-            titleErrorText: '', */
             password: "",
-/*             isPasswordError: false,
-            PasswordErrorText: '',
-            redirect: false */
             errorMessage: ""
         }
     }

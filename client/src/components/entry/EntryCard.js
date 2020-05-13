@@ -6,7 +6,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 export default function EntryCard(props) {
 
-
     let entryImageSize = {   
         width:'95vw',
         height:'95vw',
