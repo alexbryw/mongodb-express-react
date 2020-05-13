@@ -89,11 +89,12 @@ export default class EntryInput extends React.Component{
                     console.log(error.response.data)
                 }
             })
-            .then(response => console.log('Success:', JSON.stringify(response))) 
-            
-            this.setState({
+            .then(
+                this.props.refreshEntries(),
+                this.props.refreshEntries(),
+                this.setState({
                 redirect:true
-            })
+            }))
         }
     }
 

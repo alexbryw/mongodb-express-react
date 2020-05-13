@@ -50,44 +50,7 @@ export default function AddEntry(props) {
                 
             </div>
             </Grid>
-{/*             <form>
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Titel"
-                        defaultValue=""
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Temporär BildURL"
-                        defaultValue=""
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <TextField
-                        required
-                        id="outlined-required"
-                        label="Text"
-                        defaultValue=""
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                />
-                <Button variant="outlined" color="secondary" style={textfieldStyle}>
-                    Edit
-                </Button>
-
-                </form> */}
-                <EntryInput/>
-
+                <EntryInput refreshEntries={props.refreshEntries}/>
             </CardContent>
         </Card>
     </Container>
