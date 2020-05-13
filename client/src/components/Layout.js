@@ -26,13 +26,16 @@ export default class Layout extends Component {
                     <Header/>
                     <Switch>
                         <Route exact path="/">
-                            <Entries entryData={this.props.entryData}/>
+                            <Entries
+                                entryData={this.props.entryData}
+                                refreshEntries={this.props.refreshEntries}
+                            />
                         </Route>
                         <Route path="/user">
                             <User/>
                         </Route>
                         <Route path="/addentry">
-                            <AddEntry/>
+                            <AddEntry refreshEntries={this.props.refreshEntries}/>
                         </Route>
                     </Switch>
                 </BrowserRouter>

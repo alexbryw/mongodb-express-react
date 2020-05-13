@@ -16,6 +16,8 @@ export default function EntryEdit(props) {
 
     function handleDelete(){
         fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, {method:'DELETE'})
+        props.refreshEntries();
+        props.refreshEntries();
     }
 
     return (
@@ -27,12 +29,22 @@ export default function EntryEdit(props) {
                     justify="space-between"
                     alignItems="center"
                 >   
-                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
+                    <IconButton color="secondary" size="small">
                         <ArrowBackIcon />
                     </IconButton>
                 </Grid>
-                <EntryAlter entryData={props.entryData}/>
-                <Button variant="contained" color="secondary" style={textfieldStyle} onClick={handleDelete}>
+                <EntryAlter
+                    entryData={props.entryData}
+                    refreshEntries={props.refreshEntries}
+                    style={textfieldStyle}
+                    editMode={props.editModeClick}
+                />
+                <Button 
+                    variant="contained" 
+                    color="secondary"
+                    style={textfieldStyle}
+                    onClick={handleDelete}
+                >
                     Delete
                 </Button>
             </CardContent>
