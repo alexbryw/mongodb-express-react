@@ -85,14 +85,12 @@ export default class EntryInput extends React.Component{
                 body: fd
             })
             .then((response) => {
-                console.log(response)
                 if(!response.ok){
                     this.setState({
                         errorMessage: response.statusText
                     })
                 }
                 else{
-                    console.log('entered here')
                     this.props.refreshEntries()
                     this.props.refreshEntries()
                     this.setState({

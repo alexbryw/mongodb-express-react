@@ -121,7 +121,7 @@ router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (
     .catch(err => {
         console.log(err)
         res.status(500).send(
-            "Could not upload entry"
+            {msg: "Could not upload entry"}
         )
     })
 
@@ -161,7 +161,7 @@ router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
 
         Entry.findByIdAndDelete(id, (err) => {
             if(err){
-                console.log('Nothing deleted')
+                res.status(401).send({msg: 'could not find entry to delete'})
             }
             fs.unlink(path, (err) => {
                 if (err) {
@@ -169,7 +169,7 @@ router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
                 }
             })
         })
-        res.status(200).json('Deletion went well')
+        res.status(200).send({msg: 'It is now gone forever'})
     }
     catch(err){
         console.log(err.message)

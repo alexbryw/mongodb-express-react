@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {Redirect} from 'react-router-dom'
 
 export default class UserLogin extends React.Component{
     constructor(props){
@@ -14,7 +15,9 @@ export default class UserLogin extends React.Component{
         this.state = {
             username: "",
             password: "",
-            errorMessage: ""
+            errorMessage: "",
+            redirect:false,
+            isErrorMessage:false
         }
     }
 
@@ -44,20 +47,48 @@ export default class UserLogin extends React.Component{
             credentials: 'include',
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then((response) => response.json())
+            
+/*              if(!response.ok){
+                this.setState({
+                    isErrorMessage: true
+                })
+            }
+            else{
+                this.props.refreshEntries()
+                this.props.refreshEntries()
+                this.setState({
+                redirect:true
+                })            
+            } */
+            
+        
         .catch(err => {
             if(err.response) { 
                 console.log(err)
             }
         })
-        .then((response) => {
-            if(!response.ok){
+         .then((response) => {
+            if(response.msg){
                 this.setState({
                     errorMessage: response.msg
                 })
             }
+            else{
+                this.props.refreshEntries()
+                this.props.refreshEntries()
+                this.setState({
+                redirect:true
+                })
+            }
             console.log(JSON.stringify(response))
-        })
+        }) 
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
     }
 
     render(){
@@ -67,6 +98,8 @@ export default class UserLogin extends React.Component{
         }
     
         return (
+            <>
+             {this.renderRedirect()}
             <CardContent>
                 <Grid
                     container
@@ -119,6 +152,7 @@ export default class UserLogin extends React.Component{
                     </Button>
                 </form>
             </CardContent>
+            </>
         );
     }
 }

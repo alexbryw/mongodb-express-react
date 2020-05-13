@@ -43,7 +43,7 @@ router.post('/api/user', async function (req, res) {
 router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
     // console.log(req.params.id)
     if(!req.body.username && !req.body.password && req.body.admin){
-        res.status(400).json(
+        res.status(400).send(
             {msg: "Pleas provide 'username' or 'password' or 'admin' to update."})
         return
     }
