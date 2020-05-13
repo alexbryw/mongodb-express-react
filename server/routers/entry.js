@@ -94,7 +94,7 @@ router.get('/api/entry/:id', (req, res, next) => {
 
 
 //Add entry.
-router.post('/api/entry', upload.single('image'), function (req, res, next) {
+router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (req, res, next) {
     //res.json({msg:"from POST /api/entry"})
     const entry = new Entry({
         _id: new  mongoose.Types.ObjectId(),
@@ -129,7 +129,7 @@ router.post('/api/entry', upload.single('image'), function (req, res, next) {
 })
 
 //Update entry.
-router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
+router.put('/api/entry/:id',secureRouteUserOrAdmin, upload.single('image'), async (req, res) => {
 
     try{
         const id = req.params.id
@@ -154,7 +154,7 @@ router.put('/api/entry/:id', upload.single('image'), async (req, res) => {
 })
 
 //Delete entry.
-router.delete('/api/entry/:id', async (req, res) => {
+router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
     try{
         const id = req.params.id
         const entry =  await Entry.findById(id)
@@ -173,12 +173,50 @@ router.delete('/api/entry/:id', async (req, res) => {
         res.status(200).json('Deletion went well')
     }
     catch(err){
-        console.log(err)
+        console.log(err.message)
         res.status(500).json({
             error: err
         })
     }
 })
+
+function secureRouteUserOrAdmin(req, res, next){
+    console.log(req.params.id)
+    console.log(req.session.username, " username")
+    console.log(req.session.role , " role")
+    console.log("from secure route user or admin entry")
+    if(!req.session.username){
+        return res.status(401).json({msg: "Login to continue."})
+    }
+
+    Entry.findOne({_id: req.params.id}, function(err, entry){
+        if(err) return res.status(400).json(err.message)
+
+        if(entry){
+            if(entry.username === req.session.username || req.session.role === "admin"){
+                console.log("Pass - ")
+                next()
+                // res.status(404).json({msg: "test pass"})
+            }
+        } else {
+            res.status(404).json({msg: "Could not find entry."})
+        }
+    })
+
+}
+
+function secureRouteAnyUser(req, res, next){
+    if(!req.session.username){
+        return res.status(401).json({msg: "Login to continue."})
+    }
+    
+    if(req.body.username === req.session.username || req.session.role === "admin")
+
+    console.log("Pass - username found " , req.session.username)
+    next()
+    // res.status(404).json({msg: "testing any user"})
+
+}
 
 
 module.exports = router
