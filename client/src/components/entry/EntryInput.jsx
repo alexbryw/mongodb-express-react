@@ -17,7 +17,8 @@ export default class EntryInput extends React.Component{
             titleErrorText: '',
             isImageError: false,
             imageErrorText: '',
-            redirect: false
+            redirect: false,
+            errorMessage: ""
         }
     }
 
@@ -83,24 +84,33 @@ export default class EntryInput extends React.Component{
                 credentials: 'include',
                 body: fd
             })
-            .then(response => response.json())
+            .then((response) => response.json())
             .catch(error => {
                 if(error.response) { 
                     console.log(error.response.data)
                 }
             })
-            .then(
-                this.props.refreshEntries(),
-                this.props.refreshEntries(),
-                this.setState({
-                redirect:true
-            }))
+            .then((response) => {
+                if(response.msg){
+                    this.setState({
+                        errorMessage: response.msg
+                    })
+                }
+                else{
+                    this.props.refreshEntries()
+                    this.props.refreshEntries()
+                    this.setState({
+                    redirect:true
+                    })
+                }
+                console.log(JSON.stringify(response))
+            })                      
         }
     }
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/' />
+            return <Redirect to='/'/>
         }
     }
 
@@ -112,7 +122,7 @@ export default class EntryInput extends React.Component{
 
         return(
             <>
-                {this.renderRedirect()}
+            {this.renderRedirect()}
                 <form style = {{width: '100%'}}>          
                     <TextField
                         variant="outlined"
@@ -131,8 +141,7 @@ export default class EntryInput extends React.Component{
                         style = {{display: 'none'}}
                         onChange = {this.selectedFileHandler}                      
                     />
-                    <label htmlFor="icon-button-file">
-                        
+                    <label htmlFor="icon-button-file">                      
                         <IconButton 
                             color="secondary"
                             aria-label="upload picture" 
@@ -154,7 +163,8 @@ export default class EntryInput extends React.Component{
                         color="secondary"
                         inputProps = {{maxLength: 140}}
                         onChange = {this.selectedTextHandler}
-                    />                           
+                    />
+                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>                         
                     <Button 
                         variant="contained" 
                         color= "secondary"

@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {Redirect} from 'react-router-dom'
 
 export default class UserRegister extends React.Component{
     constructor(props){
@@ -14,7 +15,8 @@ export default class UserRegister extends React.Component{
         this.state = {
             username: "",
             password: "",
-            errorMessage: ""
+            errorMessage: "",
+            redirect: false
         }
     }
 
@@ -44,18 +46,27 @@ export default class UserRegister extends React.Component{
         })
         .then((response) => response.json())
         .catch((err) => {
-
                 console.log(err)
-
         })
         .then((response) => {
-                if(!response.ok){
-                    this.setState({
-                        errorMessage: response.msg
-                    })
-                }
-                console.log(JSON.stringify(response))
+            if(response.msg){
+                this.setState({
+                    errorMessage: response.msg
+                })
+            }
+            else{
+                this.setState({
+                redirect:true
+                })
+            }
+            console.log(JSON.stringify(response))
         })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
     }
 
     render(){
@@ -65,51 +76,54 @@ export default class UserRegister extends React.Component{
         }
     
         return (
-            <CardContent>
-                <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                >   
-                <Link to="/">
-                    <IconButton color="secondary" size="small">
-                        <ArrowBackIcon />
-                    </IconButton>
-                </Link>
-                <Typography variant="h5" component="h2">
-                    Register
-                </Typography>
-                    <div>
-                        
-                    </div>
-                </Grid>
-                <form>
-                    <TextField
-                        required
-                        label="User"
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                        onChange = {this.handleUsername}
-                    />
-                    <TextField
-                        required
-                        label="Password"
-                        variant="outlined"
-                        fullWidth
-                        color="secondary"
-                        style={textfieldStyle}
-                        type="password"
-                        onChange = {this.handlePassword}
-                    />
-                    <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
-                    <Button variant="outlined" color="secondary" style={textfieldStyle} onClick = {this.sendRegistrationRequest}>
+            <>
+                {this.renderRedirect()}
+                <CardContent>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                    >   
+                    <Link to="/">
+                        <IconButton color="secondary" size="small">
+                            <ArrowBackIcon />
+                        </IconButton>
+                    </Link>
+                    <Typography variant="h5" component="h2">
                         Register
-                    </Button>
-                </form>
-            </CardContent>
+                    </Typography>
+                        <div>
+                            
+                        </div>
+                    </Grid>
+                    <form>
+                        <TextField
+                            required
+                            label="User"
+                            variant="outlined"
+                            fullWidth
+                            color="secondary"
+                            style={textfieldStyle}
+                            onChange = {this.handleUsername}
+                        />
+                        <TextField
+                            required
+                            label="Password"
+                            variant="outlined"
+                            fullWidth
+                            color="secondary"
+                            style={textfieldStyle}
+                            type="password"
+                            onChange = {this.handlePassword}
+                        />
+                        <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>
+                        <Button variant="outlined" color="secondary" style={textfieldStyle} onClick = {this.sendRegistrationRequest}>
+                            Register
+                        </Button>
+                    </form>
+                </CardContent>
+            </>
         );
 
     }

@@ -9,13 +9,11 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Content-Disposition: form-data; name="username"
 //Content-Type: application/json
 
-Fluff
-
+RageQuit
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="title"
 
 Sent from REST
-
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="image"; filename="Ninja10.jpg"
 Content-Type: image/jpeg
@@ -24,8 +22,7 @@ Content-Type: image/jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="text"
 
-This is a default picture
-
+This is a default picture of a none default dog
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
