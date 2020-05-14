@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   async callUserAPI(){
-      fetch("http://localhost:9000/user/login", {method: 'GET',credentials: 'include'})
+      fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
       .then((response) => { 
         console.log(response)
         if(response.ok){
