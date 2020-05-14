@@ -41,14 +41,15 @@ router.post('/api/user', async function (req, res) {
 
 //Admin can update a user.
 router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
-    // console.log(req.params.id)
-    if(!req.body.username && !req.body.password && req.body.admin){
+    console.log(req.body.admin)
+    console.log(" from put admin")
+    if(!req.body.admin){
         res.status(400).send(
-            {msg: "Pleas provide 'username' or 'password' or 'admin' to update."})
+            {msg: "Provide 'admin' status to update."})
         return
     }
 
-    User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user){
+    User.findByIdAndUpdate({_id: req.params.id}, {admin: req.body.admin}, {new: true}, function(err, user){
         if(err) return res.status(404).json({msg: "Error wrong user id format."})
         if(user){
             res.json(user)

@@ -22,13 +22,25 @@ export default class UserCard extends React.Component{
 
 
     handleDelete = () => {
-        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`, {method:'DELETE'})
+        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,{method:'DELETE', credentials: "include"})
         .catch(error => console.error('Error:', error))
         .then(this.setState({deleted: !this.state.deleted})) 
     }
 
     handleAdmin = () => {
-        this.setState({admin: !this.state.admin})
+        const data = JSON.stringify({admin: !this.props.userData.admin})
+        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,
+        {
+            method:'PUT',
+            headers: {
+                Accept: 'application/json',
+                "Content-Type" : "application/json"
+            },
+            credentials: "include",
+            body: data
+        })
+        .catch(error => console.error('Error:', error))
+        .then(this.setState({admin: !this.state.admin}))
     }
 
     /*handleAdmin = () => {
@@ -79,7 +91,7 @@ export default class UserCard extends React.Component{
                                 <Typography variant="subtitle1" >{ "User: " + this.props.userData.username}</Typography>
                             </Grid>
                         </div>
-                            
+                        {this.props.userData.username !== "admin" ?
                         <div>
                             <Button 
                                 variant="outlined" 
@@ -96,6 +108,25 @@ export default class UserCard extends React.Component{
                                 <DeleteForever/>
                             </IconButton>
                         </div>
+                        :
+                        <div>
+                        {/* <Button 
+                            variant="outlined" 
+                            size="small" 
+                            color="grey" 
+                            
+                        >
+                        {this.state.admin? 
+                                "Unadminify"
+                                :"Adminify"
+                        }
+                        </Button>
+                        <IconButton color="grey">
+                            <DeleteForever/>
+                        </IconButton> */}
+                    </div>
+                        }
+                            
                     </Grid>
                 </Card>
             )
