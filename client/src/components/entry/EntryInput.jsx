@@ -9,7 +9,6 @@ export default class EntryInput extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            username: this.props.userData,
             title: "",
             selectedFile: null,
             text: "",
@@ -74,7 +73,7 @@ export default class EntryInput extends React.Component{
 
         if(!err){
             const fd = new FormData()
-            fd.append('username', this.state.username)
+            fd.append('username', this.props.userData)
             fd.append('title', this.state.title)
             fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
             fd.append('text', this.state.text)
