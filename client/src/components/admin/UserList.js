@@ -32,8 +32,9 @@ export default class UserList extends React.Component{
 
     render(){
         const users = this.state.apiResponse;
-        if(this.state.apiResponse === undefined){
-            return <div></div>
+        // console.log(users)
+        if(users == null || users.length < 1 || users.msg){
+            return <div><h3>Login with admin account.</h3></div>
         } else {
             return(
                 <>

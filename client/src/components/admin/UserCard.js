@@ -16,37 +16,50 @@ export default class UserCard extends React.Component{
         super(props)
         this.state = {
             admin: this.props.userData.admin,
-            deleted: false
+            deleted: false,
+            currentUsername: ""
         }
     }
 
 
     handleDelete = () => {
-        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`, {method:'DELETE'})
+        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,{method:'DELETE', credentials: "include"})
         .catch(error => console.error('Error:', error))
         .then(this.setState({deleted: !this.state.deleted})) 
     }
 
     handleAdmin = () => {
-        this.setState({admin: !this.state.admin})
-    }
-
-    /*handleAdmin = () => {
-        let updateUser = {
-            admin: !this.state.admin
-        }
-    
-        fetch(`http://localhost:9000/api/user/${this.props.entryData._id}`,{
-            method: 'PUT',
+        let data = JSON.stringify({admin: !this.state.admin})
+        fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,
+        {
+            method:'PUT',
             headers: {
+                Accept: 'application/json',
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify(updateUser)
+            credentials: "include",
+            body: data
         })
-        .then(response => response.json())
         .catch(error => console.error('Error:', error))
-        .then(this.setState({admin: !this.state.admin})) 
-    }*/
+        .then(this.setState({admin: !this.state.admin}))
+    }
+
+    async getCurrentUser(){
+        const response = await fetch('http://localhost:9000/api/user/login', {method: 'GET',credentials: 'include'})
+        const currentUser = await response.json()
+        if(currentUser.username != null){
+            this.setState({currentUsername: currentUser.username})
+            // console.log(currentUser)
+        } else {
+            this.setState({currentUsername: ""})
+            // console.log(currentUser)
+        }
+
+    }
+
+    async componentDidMount(){
+        this.getCurrentUser()
+    }
 
     render(){
         const UserCardStyle = {
@@ -79,7 +92,24 @@ export default class UserCard extends React.Component{
                                 <Typography variant="subtitle1" >{ "User: " + this.props.userData.username}</Typography>
                             </Grid>
                         </div>
-                            
+                        {this.props.userData.username === "admin" || this.state.currentUsername === this.props.userData.username ?
+                        <div>
+                            {/* <Button 
+                                variant="outlined" 
+                                size="small" 
+                                color="grey" // gråa ut knapparna ?
+                                
+                                >
+                                {this.state.admin? 
+                                    "Unadminify"
+                                    :"Adminify"
+                                }
+                                </Button>
+                                <IconButton color="grey">
+                                <DeleteForever/>
+                            </IconButton> */}
+                        </div>
+                        :
                         <div>
                             <Button 
                                 variant="outlined" 
@@ -96,6 +126,8 @@ export default class UserCard extends React.Component{
                                 <DeleteForever/>
                             </IconButton>
                         </div>
+                        }
+                            
                     </Grid>
                 </Card>
             )
