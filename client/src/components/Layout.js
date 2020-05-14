@@ -31,6 +31,7 @@ export default class Layout extends Component {
                     <Switch>
                         <Route exact path="/">
                             <Entries
+                                userData={this.props.userData}
                                 entryData={this.props.entryData}
                                 refreshEntries={this.props.refreshEntries}
                             />

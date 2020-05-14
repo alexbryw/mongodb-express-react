@@ -21,6 +21,17 @@ export default function EntryCardContent(props) {
 
     }
 
+    function checkOwner(){
+        if(props.userData.username){
+            if(props.userData.admin || props.userData.username === props.entryData.username){
+                return (
+                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
+                    <EditIcon />
+                    </IconButton>
+                )
+            }
+        }
+    }
     return (
         <>
             <CardContent>
@@ -35,9 +46,7 @@ export default function EntryCardContent(props) {
                 </Typography>
                 <Typography variant="body2" align="left" color="secondary" component="p">
                     By: {props.entryData.username}
-                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
-                        <EditIcon />
-                    </IconButton>
+                    {checkOwner()}
                 </Typography>
             </Grid>
             </CardContent>
