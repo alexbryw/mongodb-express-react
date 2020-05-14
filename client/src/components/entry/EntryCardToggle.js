@@ -26,6 +26,7 @@ export default class EntryCardToggle extends React.Component  {
                 />
                 :
                 <EntryCardContent 
+                    userData={this.props.userData}
                     entryData={this.props.entryData}
                     editModeClick={this.enterEditMode}
                 />
