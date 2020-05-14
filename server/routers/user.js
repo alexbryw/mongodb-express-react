@@ -43,7 +43,7 @@ router.post('/api/user', async function (req, res) {
 router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
     console.log(req.body.admin)
     console.log(" from put admin")
-    if(!req.body.admin){
+    if(req.body.admin == null){
         res.status(400).send(
             {msg: "Provide 'admin' status to update."})
         return
