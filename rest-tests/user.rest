@@ -16,12 +16,10 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:9000/api/user/5eb9371009094815bc038695
+PUT http://localhost:9000/api/user/5ebd7fa85f2d4a307807eb6e
 Content-Type: application/json
 
 {
-    "username": "Rex put",
-    "password": "password",
     "admin": "false"
 }
 
