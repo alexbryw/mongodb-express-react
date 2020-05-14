@@ -9,7 +9,7 @@ export default class EntryInput extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            username: 'starstoft',
+            username: this.props.userData,
             title: "",
             selectedFile: null,
             text: "",

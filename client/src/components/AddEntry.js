@@ -48,7 +48,7 @@ export default function AddEntry(props) {
                 
             </div>
             </Grid>
-                <EntryInput refreshEntries={props.refreshEntries}/>
+                <EntryInput refreshEntries={props.refreshEntries} userData={this.props.userData}/>
             </CardContent>
         </Card>
     </Container>

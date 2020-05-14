@@ -43,7 +43,10 @@ export default class Layout extends Component {
                             <User refreshEntries={this.props.refreshEntries} refreshUser={this.props.refreshUser}/>
                         </Route>
                         <Route path="/addentry">
-                            <AddEntry refreshEntries={this.props.refreshEntries}/>
+                            <AddEntry 
+                                refreshEntries={this.props.refreshEntries}
+                                userData={this.props.userData}
+                                />
                         </Route>
                     </Switch>
                 </BrowserRouter>
