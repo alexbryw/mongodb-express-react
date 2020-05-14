@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       apiResponse: [],
+      loggedInUser: "",
       refresh: false
     }
   }
@@ -22,8 +23,23 @@ class App extends React.Component {
     .catch(error => console.error('Error:', error))
   }
 
+  async callUserAPI(){
+    if(true){
+      fetch("http://localhost:9000/user/login")
+      .then((response) => { 
+        if(response.ok){
+          return response.json()
+        }
+      })
+      .then((data) => {this.setState({loggedInUser: data})})
+      .catch(error => console.error('Error:', error))
+      .then(console.log(this.state.loggedInUser))
+    }
+  }
+
   componentDidMount(){
     this.callAPI()
+    this.callUserAPI()
   }
 
   refreshEntries = () => {
