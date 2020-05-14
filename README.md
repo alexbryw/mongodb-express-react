@@ -16,17 +16,14 @@ The assignment “User based content app” included using Express, Node.js, Mon
 
 [Github Repository](https://github.com/alexbryw/mongodb-express-react)
 
-# Install  
-1. In /client folder run: npm install  
-2. In /server folder run: npm install  
 
 # Start / Install
 
-Open two terminals in VSCode.  
+1. Open two terminals in VSCode.  
 
 ---------------
 
-In the first terminal enter **cd client**. 
+2. In the first terminal enter **cd client**. 
 
 Then:
  - If this is the **first time** you run this project: enter npm **install** and after that **npm start** in this terminal. 
@@ -36,7 +33,7 @@ A react client will open the default browser on http://localhost:3000
 
 ---------------
 
-In the second terminal enter **cd server**.
+3. In the second terminal enter **cd server**.
 
 Then:
  - If this is the **first time** you run this project: run **npm install** and after that **npm start** in this terminal. 
@@ -44,6 +41,15 @@ Then:
 
 A nodemon server will start an express api server on http://localhost:9000
 
+---------------
+
+### A default user to use for testing purposes:
+
+Log in with:
+
+username: admin
+
+password: admin
 
 
 # Creators
