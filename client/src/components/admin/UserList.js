@@ -11,13 +11,6 @@ export default class UserList extends React.Component{
         }
     }
 
-    // USE TO CHECK IF ADMIN. IF NOT REDIRECT
-    //USER.JS r79 ADD BLOCK
-            /*if(req.session.role !== role){
-            res.status(401).json({msg: "Access denied. Please login with the correct access privileges"})
-            return
-        }*/
-
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/' />
@@ -27,7 +20,7 @@ export default class UserList extends React.Component{
     
 
     async callAPI(){
-        fetch("http://localhost:9000/api/user")
+        fetch("http://localhost:9000/api/user", {method: 'GET',credentials: 'include'})
         .then((response) => { return response.json()})
         .then((data) => {this.setState({apiResponse: data})})
         .catch(error => console.error('Error:', error))
