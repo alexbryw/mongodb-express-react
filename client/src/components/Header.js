@@ -7,7 +7,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Header(props) {
     let headerSize = {   
@@ -21,8 +21,21 @@ export default function Header(props) {
             width:'35em', 
         }
     }
-    console.log(props.userData)
+    let loggedIn
+    if (Object.entries(props.userData).length === 0){
+        loggedIn = false
+    } else {
+        loggedIn = true
+    }
 
+    function handleLogOut(){
+
+        fetch(`http://localhost:9000/api/user/logout`, 
+        {method:'DELETE',credentials: 'include'})
+        .then(
+            setTimeout(function(){ props.refreshUser() }, 3000)
+        )
+    }
 
     return (
         <Container style={headerSize}>
@@ -47,16 +60,21 @@ export default function Header(props) {
                     )
                     :("")
                 }
-
-                <Link to="/addentry">
-                    <IconButton color="primary">
-                        <ControlPointIcon />
-                    </IconButton>
-                </Link>
                 {
-                    props.userData === {}?
+                    loggedIn?
                     (
-                        <IconButton color="primary">
+                        <Link to="/addentry">
+                            <IconButton color="primary">
+                                <ControlPointIcon />
+                            </IconButton>
+                        </Link>
+                    ) : ("")
+                }
+
+                {
+                    loggedIn?
+                    (
+                        <IconButton color="primary" onClick={handleLogOut}>
                             <ExitToAppIcon />
                         </IconButton>
                     ):(
