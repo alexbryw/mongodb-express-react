@@ -158,7 +158,7 @@ export default class EntryInput extends React.Component{
                     <Button 
                         variant="contained" 
                         color= "secondary"
-                        style = {{width: '100%'}}
+                        style = {{width: '100%', marginTop: '1em'}}
                         onClick = {this.handleEntryUpload}>
                         submit
                     </Button>

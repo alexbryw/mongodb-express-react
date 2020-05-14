@@ -17,6 +17,7 @@ export default function AdminPage() {
 
     const cardStyle = {
         backgroundColor: '#d1c4e9',
+        minHeight: '50vh'
     }
 
     if(useMediaQuery('(min-width:37em)')){

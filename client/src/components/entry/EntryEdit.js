@@ -15,9 +15,12 @@ export default function EntryEdit(props) {
     }
 
     function handleDelete(){
-        fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, {method:'DELETE',credentials: 'include'})
-        props.refreshEntries();
-        props.refreshEntries();
+        fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, 
+            {method:'DELETE',credentials: 'include'}).then(
+                props.refreshEntries(),
+                props.refreshEntries(),
+                props.refreshEntries()
+            )
     }
 
     return (

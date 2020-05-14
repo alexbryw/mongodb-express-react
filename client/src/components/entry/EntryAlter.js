@@ -9,7 +9,8 @@ export default class EntryAlter extends React.Component{
         this.state = {
             title: this.props.entryData.title,
             text: this.props.entryData.text,
-            isTitleError: false
+            isTitleError: false,
+            errorMessage: ""
         }
     }
 
@@ -53,14 +54,22 @@ export default class EntryAlter extends React.Component{
                     body: JSON.stringify(updatedEntry)
                 })
                 .then(response => response.json())
-                .catch(error => console.error('Error:', error))
-                .then(
-                    this.props.refreshEntries(),
+                .catch(err => {
+                    if(err.response) { 
+                        console.log(err)
+                    }
+                }).then((response) => {
+                    if(!response.ok){
+                        this.setState({
+                            errorMessage: response.msg
+                        })
+                    }
+                }).then(
                     this.props.refreshEntries(),
                     this.props.editMode()
-    
-                ) 
-            }
+
+            )
+        }
     }
 
     render(){
@@ -103,7 +112,8 @@ export default class EntryAlter extends React.Component{
                     defaultValue={this.props.entryData.text}
                     onChange = {this.selectedTextHandler}
                     fullWidth
-                />                           
+                /> 
+                <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>      
                 <Button 
                     variant="outlined" 
                     color="secondary"

@@ -29,8 +29,8 @@ class App extends React.Component {
   refreshEntries = () => {
     fetch("http://localhost:9000/api/entry/")
     .then((response) => { return response.json()})
-    .then((data) => {this.setState({apiResponse: data})})
     .catch(error => console.error('Error:', error))
+    .then((data) => {this.setState({apiResponse: data})})
   }
 
   render(){
