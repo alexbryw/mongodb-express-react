@@ -1,128 +1,104 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-
-
-export default class EntryAlter extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            title: this.props.entryData.title,
+import React from 'react'	
+import TextField from '@material-ui/core/TextField'	
+import Button from '@material-ui/core/Button'	
+export default class EntryAlter extends React.Component{	
+    constructor(props){	
+        super(props)	
+        this.state = {	
+            title: this.props.entryData.title,	
             text: this.props.entryData.text,
             isTitleError: false,
-            errorMessage: ""
-        }
-    }
-
-    selectedTitleHandler = event => {
-        this.setState({
-            title: event.target.value
-        })
-    }
-
-    selectedTextHandler = event => {
-        this.setState({
-            text: event.target.value
-        })
-    }
-
-    //WILL NEED A ONCHANGE FOR USER
-
-    entryUploadHandler = () => {
-            if((this.state.title === "")){
-                this.setState({
-                    isTitleError: true
-                })   
-            } else {
-
-                this.setState({
-                    isTitleError: false
-                })  
-
-                let updatedEntry = {
-                    title: this.state.title,
-                    text: this.state.text,
-                    image: this.props.entryData.image,
-                }
-            
-                fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{
-                    method: 'PUT',
-                    headers: {
-                        "Content-Type" : "application/json"
-                    },
-                    body: JSON.stringify(updatedEntry)
-                })
-                .then(response => response.json())
-                .catch(err => {
-                    if(err.response) { 
-                        console.log(err)
-                    }
-                }).then((response) => {
-                    if(!response.ok){
-                        this.setState({
-                            errorMessage: response.msg
-                        })
-                    }
-                }).then(
-                    this.props.refreshEntries(),
-                    this.props.editMode()
-
-            )
-        }
-    }
-
-    render(){
-        const entryAlterStyle = {
-            width: "80%",
-            margin: "0.5em 0"
-        }
-
-        const image = "http://localhost:9000/" + this.props.entryData.image;
-
-        let entryImage = {   
-            maxWidth:'80%',
-            minWidth: '80%',
-            backgroundColor:"white"
-        }
-
-        return(
-            <div>
-                <TextField 
-                    required label="Title" 
-                    color="secondary"
-                    style={entryAlterStyle}
-                    onChange = {this.selectedTitleHandler}
-                    defaultValue={this.props.entryData.title}
-                    variant="outlined" 
+        }	
+    }	
+    selectedTitleHandler = event => {	
+        this.setState({	
+            title: event.target.value	
+        })	
+        console.log(this.state.title)	
+    }	
+    selectedTextHandler = event => {	
+        this.setState({	
+            text: event.target.value	
+        })	
+    }	
+    //WILL NEED A ONCHANGE FOR USER	
+    entryUploadHandler = () => {	
+            if((this.state.title === "")){	
+                if(this.state.title === ""){	
+                    this.setState({	
+                        isTitleError: true	
+                    })	
+                }	
+            }	
+            let updatedEntry = {	
+                title: this.state.title,	
+                text: this.state.text,	
+                image: this.props.entryData.image	
+            }	
+        	
+            fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{	
+                method: 'PUT',	
+                headers: {	
+                    "Content-Type" : "application/json"	
+                },
+                credentials: 'include',
+                body: JSON.stringify(updatedEntry)	
+            })	
+            .then(response => response.json())	
+            .catch(error => console.error('Error:', error))	
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .then(
+                this.props.refreshEntries(),
+                this.props.refreshEntries(),
+                this.props.editMode()
+        )	
+    }	
+    render(){	
+        const entryAlterStyle = {	
+            width: "80%",	
+            margin: "0.5em 0"	
+        }	
+        const image = "http://localhost:9000/" + this.props.entryData.image;	
+        let entryImage = {   	
+            maxWidth:'80%',	
+            minWidth: '80%'	
+        }	
+        return(	
+            <div>	
+                <TextField 	
+                    required label="Title" 	
+                    color="secondary"	
+                    style={entryAlterStyle}	
+                    onChange = {this.selectedTitleHandler}	
+                    defaultValue={this.props.entryData.title}	
+                    variant="outlined" 	
                     fullWidth
                     error={this.state.isTitleError}
-                    />
-                <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>
-                <TextField
-                    label= "Text, max 140 characters"
-                    multiline
-                    rows="4"
-                    variant="outlined"
-                    style={entryAlterStyle}
-                    color="secondary"
-                    inputProps={{
-                        maxLength: 140,
-                    }}
-                    defaultValue={this.props.entryData.text}
-                    onChange = {this.selectedTextHandler}
-                    fullWidth
-                /> 
-                <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>      
-                <Button 
-                    variant="outlined" 
-                    color="secondary"
-                    style={entryAlterStyle}
-                    fullWidth
-                    onClick = {this.entryUploadHandler}>
-                    Edit
-                </Button>
-            </div>
-
-        )
-    }
+                    />	
+                <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>	
+                <TextField	
+                    label= "Text, max 140 characters"	
+                    multiline	
+                    rows="4"	
+                    variant="outlined"	
+                    style={entryAlterStyle}	
+                    color="secondary"	
+                    inputProps={{	
+                        maxLength: 140,	
+                    }}	
+                    defaultValue={this.props.entryData.text}	
+                    onChange = {this.selectedTextHandler}	
+                    fullWidth	
+                />                           	
+                <Button 	
+                    variant="outlined" 	
+                    color="secondary"	
+                    style={entryAlterStyle}	
+                    fullWidth	
+                    onClick = {this.entryUploadHandler}>	
+                    Edit	
+                </Button>	
+            </div>	
+        )	
+    }	
 }
