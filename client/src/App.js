@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       apiResponse: [],
-      loggedInUser: "",
+      userData: {},
       refresh: false
     }
   }
@@ -25,15 +25,9 @@ class App extends React.Component {
 
   async callUserAPI(){
       fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
-      .then((response) => { 
-        console.log(response)
-        if(response.ok){
-          return response.json()
-        }
-      })
-      .then((data) => {this.setState({loggedInUser: data})})
+      .then((response) => { return response.json()})
+      .then((data) => {this.setState({userData: data})})
       .catch(error => console.error('Error:', error))
-      .then(console.log(this.state.loggedInUser))
   }
 
   componentDidMount(){
@@ -44,8 +38,17 @@ class App extends React.Component {
   refreshEntries = () => {
     fetch("http://localhost:9000/api/entry/")
     .then((response) => { return response.json()})
-    .catch(error => console.error('Error:', error))
     .then((data) => {this.setState({apiResponse: data})})
+    .catch(error => console.error('Error:', error))
+  }
+
+  refreshUser = () => {
+    setTimeout(function(){ 
+    }, 3000);
+    fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
+    .then((response) => { return response.json()})
+    .then((data) => {this.setState({userData: data})})
+    .catch(error => console.error('Error:', error))
   }
 
   render(){
@@ -54,7 +57,9 @@ class App extends React.Component {
         <div className="App">
           <Layout 
             entryData={this.state.apiResponse}
+            userData={this.state.userData}
             refreshEntries={this.refreshEntries}
+            refreshUser={this.refreshUser}
           />
         </div>
       </ThemeProvider>

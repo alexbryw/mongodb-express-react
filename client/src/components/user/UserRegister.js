@@ -55,6 +55,8 @@ export default class UserRegister extends React.Component{
                 })
             }
             else{
+                this.props.refreshEntries()
+                this.props.refreshEntries()
                 this.setState({
                 redirect:true
                 })

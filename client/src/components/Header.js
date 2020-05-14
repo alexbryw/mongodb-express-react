@@ -6,9 +6,10 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
-import { Link } from 'react-router-dom'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header(props) {
     let headerSize = {   
         width:'95vw',
     }
@@ -20,6 +21,22 @@ export default function Header() {
             width:'35em', 
         }
     }
+    let loggedIn
+    if (Object.entries(props.userData).length === 0){
+        loggedIn = false
+    } else {
+        loggedIn = true
+    }
+
+    function handleLogOut(){
+
+        fetch(`http://localhost:9000/api/user/logout`, 
+        {method:'DELETE',credentials: 'include'})
+        .then(
+            setTimeout(function(){ props.refreshUser() }, 3000)
+        )
+    }
+
     return (
         <Container style={headerSize}>
             <Grid
@@ -33,21 +50,42 @@ export default function Header() {
                 <img src={require('../assets/logo.png')} alt="logo" style={{height:"2em", paddingRight:"1em"}}/>
             </Link>
             <div>
-            <Link to="/admin">
-                    <IconButton color="primary">
-                        <TextFormatIcon />
-                    </IconButton>
-                </Link>
-                <Link to="/addentry">
-                    <IconButton color="primary">
-                        <ControlPointIcon />
-                    </IconButton>
-                </Link>
-                <Link to="/user">
-                    <IconButton color="primary">
-                        <AccountCircleIcon />
-                    </IconButton>
-                </Link>
+                {props.userData.admin?      
+                    (
+                        <Link to="/admin">
+                            <IconButton color="primary">
+                            <TextFormatIcon />
+                            </IconButton>
+                        </Link>    
+                    )
+                    :("")
+                }
+                {
+                    loggedIn?
+                    (
+                        <Link to="/addentry">
+                            <IconButton color="primary">
+                                <ControlPointIcon />
+                            </IconButton>
+                        </Link>
+                    ) : ("")
+                }
+
+                {
+                    loggedIn?
+                    (
+                        <IconButton color="primary" onClick={handleLogOut}>
+                            <ExitToAppIcon />
+                        </IconButton>
+                    ):(
+                        <Link to="/user">
+                            <IconButton color="primary">
+                                <AccountCircleIcon />
+                            </IconButton>
+                        </Link>
+                    )
+                }
+
             </div>
             </Grid>
         </Container>
