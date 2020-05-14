@@ -12,7 +12,6 @@ class App extends React.Component {
     this.state = {
       apiResponse: [],
       userData: {},
-      refresh: false
     }
   }
 
@@ -43,13 +42,12 @@ class App extends React.Component {
   }
 
   refreshUser = () => {
-    setTimeout(function(){ 
-    }, 3000);
     fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
     .then((response) => { return response.json()})
     .then((data) => {this.setState({userData: data})})
     .catch(error => console.error('Error:', error))
   }
+
 
   render(){
     return (
