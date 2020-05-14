@@ -2,6 +2,7 @@ import React from 'react';
 import UserLogin from './UserLogin';
 import UserRegister from './UserRegister';
 import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default class UserToggle extends React.Component  {
     constructor(props){
@@ -16,9 +17,9 @@ export default class UserToggle extends React.Component  {
     }
 
     render(){
-        const textfieldStyle = {
+        const buttonStyle = {
             width: "80%",
-            marginTop: "1em"
+            marginBottom: "2em"
         }
       return (
         <>
@@ -27,8 +28,11 @@ export default class UserToggle extends React.Component  {
             : <UserRegister refreshEntries = {this.props.refreshEntries}/>
             }
 
-            <Button variant="outlined" color="secondary" style={textfieldStyle} onClick={this.enterLoginMode}>
-                Test
+            <Button variant="contained" color="secondary" style={buttonStyle} onClick={this.enterLoginMode}>
+                <ArrowBackIcon fontSize="small"/>
+                {this.state.loginMode? 
+                "  Register a new User" : "  Log in page"
+                }
             </Button>
         </>
       );

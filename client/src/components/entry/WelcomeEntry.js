@@ -1,8 +1,8 @@
 import React from 'react';
-import EntryCardToggle from './EntryCardToggle';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Typography from '@material-ui/core/Typography';
 
 export default function EntryCard(props) {
 
@@ -11,7 +11,7 @@ export default function EntryCard(props) {
     }
 
     const cardStyle = {
-        backgroundColor: '#d1c4e9',
+        backgroundColor: '#fbc02d',
         marginBottom: "1em"
     }
 
@@ -24,11 +24,16 @@ export default function EntryCard(props) {
     return (
         <Grid item>
             <Card style={{...cardStyle, ...entryWidth}}>
-                <EntryCardToggle 
-                    entryData={ props.entryData }
-                    refreshEntries={props.refreshEntries}
-                />
-            </Card>
+                <Typography 
+                    variant="caption"
+                    component="h2"
+                    align="left"
+                    style={{margin:"1em"}}
+                    color="secondary"
+                >
+                    Välkommen {"BENGT"}
+                </Typography>
+            </Card>     
         </Grid>
   );
 }

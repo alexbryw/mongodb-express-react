@@ -8,16 +8,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import EntryInput from './entry/EntryInput'
+import UserList from './UserList'
 
-
-export default function AddEntry(props) {
+export default function AdminPage() {
     let entryWidth = {   
         width:'95vw',
     }
 
     const cardStyle = {
         backgroundColor: '#d1c4e9',
+        minHeight: '50vh'
     }
 
     if(useMediaQuery('(min-width:37em)')){
@@ -42,13 +42,13 @@ export default function AddEntry(props) {
                 </IconButton>
             </Link>
             <Typography variant="h5" component="h2">
-                Add Entry
+                Admin Page
             </Typography>
             <div>
                 
             </div>
             </Grid>
-                <EntryInput refreshEntries={props.refreshEntries}/>
+            <UserList/>
             </CardContent>
         </Card>
     </Container>

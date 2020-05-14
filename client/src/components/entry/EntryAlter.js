@@ -9,7 +9,8 @@ export default class EntryAlter extends React.Component{
         this.state = {
             title: this.props.entryData.title,
             text: this.props.entryData.text,
-            isTitleError: false
+            isTitleError: false,
+            errorMessage: ""
         }
     }
 
@@ -53,31 +54,22 @@ export default class EntryAlter extends React.Component{
                     body: JSON.stringify(updatedEntry)
                 })
                 .then(response => response.json())
-                .catch(error => console.error('Error:', error))
-                .then(
-                    this.props.refreshEntries(),
+                .catch(err => {
+                    if(err.response) { 
+                        console.log(err)
+                    }
+                }).then((response) => {
+                    if(!response.ok){
+                        this.setState({
+                            errorMessage: response.msg
+                        })
+                    }
+                }).then(
                     this.props.refreshEntries(),
                     this.props.editMode()
-    
-                ) 
-            }
 
-            let updatedEntry = {
-                title: this.state.title,
-                text: this.state.text,
-                image: this.props.entryData.image
-            }
-        
-            fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{
-                method: 'PUT',
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify(updatedEntry)
-            })
-            .then(response => response.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', JSON.stringify(response))) 
+            )
+        }
     }
 
     render(){
@@ -90,7 +82,8 @@ export default class EntryAlter extends React.Component{
 
         let entryImage = {   
             maxWidth:'80%',
-            minWidth: '80%'
+            minWidth: '80%',
+            backgroundColor:"white"
         }
 
         return(
@@ -119,7 +112,8 @@ export default class EntryAlter extends React.Component{
                     defaultValue={this.props.entryData.text}
                     onChange = {this.selectedTextHandler}
                     fullWidth
-                />                           
+                /> 
+                <p style = {{color: 'red', fontWeight: 'bold'}}>{this.state.errorMessage}</p>      
                 <Button 
                     variant="outlined" 
                     color="secondary"

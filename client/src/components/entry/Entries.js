@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import EntryCard from './EntryCard';
+import WelcomeEntry from './WelcomeEntry';
 
 export default class Enties extends Component {
     constructor(props) {
         super(props)
-        this.state ={}
+        this.state ={
+            loggedIn: true
+        }
     }
     
     render() {
@@ -22,6 +25,7 @@ export default class Enties extends Component {
                         justify="space-between"
                         alignItems="center"
                     >
+                    {this.state.loggedIn ? <WelcomeEntry/> : ""}
                     {entries.map((entry) =>
                         <EntryCard 
                             entryData={ entry } 
