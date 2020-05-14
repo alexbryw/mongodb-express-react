@@ -30,7 +30,7 @@ export default function Header() {
                 style={headerStyle}
             >
             <Link to="/">
-                <img src={require('../assets/logo.png')} alt="logo" style={{height:"3em", paddingRight:"1em"}}/>
+                <img src={require('../assets/logo.png')} alt="logo" style={{height:"2em", paddingRight:"1em"}}/>
             </Link>
             <div>
             <Link to="/admin">

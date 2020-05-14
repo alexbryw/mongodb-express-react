@@ -17,9 +17,9 @@ export default class UserToggle extends React.Component  {
     }
 
     render(){
-        const textfieldStyle = {
+        const buttonStyle = {
             width: "80%",
-            marginTop: "1em"
+            marginBottom: "2em"
         }
       return (
         <>
@@ -28,7 +28,7 @@ export default class UserToggle extends React.Component  {
             : <UserRegister/>
             }
 
-            <Button variant="contained" color="secondary" style={textfieldStyle} onClick={this.enterLoginMode}>
+            <Button variant="contained" color="secondary" style={buttonStyle} onClick={this.enterLoginMode}>
                 <ArrowBackIcon fontSize="small"/>
                 {this.state.loginMode? 
                 "  Register a new User" : "  Log in page"

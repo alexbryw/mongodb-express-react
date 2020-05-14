@@ -18,8 +18,6 @@ export default function AddEntry(props) {
 
     const cardStyle = {
         backgroundColor: '#d1c4e9',
-        height: "80vh",
-        marginBottom: "calc(20vh-5em)"
     }
 
     if(useMediaQuery('(min-width:37em)')){

@@ -73,7 +73,8 @@ export default class EntryAlter extends React.Component{
 
         let entryImage = {   
             maxWidth:'80%',
-            minWidth: '80%'
+            minWidth: '80%',
+            backgroundColor:"white"
         }
 
         return(
