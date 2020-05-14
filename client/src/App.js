@@ -38,8 +38,17 @@ class App extends React.Component {
   refreshEntries = () => {
     fetch("http://localhost:9000/api/entry/")
     .then((response) => { return response.json()})
-    .catch(error => console.error('Error:', error))
     .then((data) => {this.setState({apiResponse: data})})
+    .catch(error => console.error('Error:', error))
+  }
+
+  refreshUser = () => {
+    setTimeout(function(){ 
+    }, 3000);
+    fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
+    .then((response) => { return response.json()})
+    .then((data) => {this.setState({userData: data})})
+    .catch(error => console.error('Error:', error))
   }
 
   render(){
@@ -50,6 +59,7 @@ class App extends React.Component {
             entryData={this.state.apiResponse}
             userData={this.state.userData}
             refreshEntries={this.refreshEntries}
+            refreshUser={this.refreshUser}
           />
         </div>
       </ThemeProvider>

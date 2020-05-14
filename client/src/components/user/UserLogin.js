@@ -63,7 +63,7 @@ export default class UserLogin extends React.Component{
                 redirect:true
                 })
             }
-            console.log(JSON.stringify(response))
+            this.props.refreshUser()
         }) 
     }
 
