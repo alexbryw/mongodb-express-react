@@ -24,7 +24,7 @@ export default class UserToggle extends React.Component  {
       return (
         <>
             {this.state.loginMode? 
-            <UserLogin refreshEntries = {this.props.refreshEntries}/>
+            <UserLogin refreshEntries = {this.props.refreshEntries} refreshUser={this.props.refreshUser}/>
             : <UserRegister refreshEntries = {this.props.refreshEntries}/>
             }
 

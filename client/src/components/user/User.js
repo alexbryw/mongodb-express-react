@@ -23,7 +23,7 @@ export default function User(props) {
   return (
     <Container style={entryWidth}>
         <Card style={cardStyle}>
-            <UserToggle refreshEntries={props.refreshEntries}/>
+            <UserToggle refreshEntries={props.refreshEntries} refreshUser={props.refreshUser}/>
         </Card>
     </Container>
   );
