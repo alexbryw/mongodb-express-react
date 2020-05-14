@@ -24,9 +24,9 @@ class App extends React.Component {
   }
 
   async callUserAPI(){
-    if(true){
-      fetch("http://localhost:9000/user/login")
+      fetch("http://localhost:9000/user/login", {method: 'GET',credentials: 'include'})
       .then((response) => { 
+        console.log(response)
         if(response.ok){
           return response.json()
         }
@@ -34,7 +34,6 @@ class App extends React.Component {
       .then((data) => {this.setState({loggedInUser: data})})
       .catch(error => console.error('Error:', error))
       .then(console.log(this.state.loggedInUser))
-    }
   }
 
   componentDidMount(){
