@@ -28,10 +28,10 @@ export default function EntryCard(props) {
                     variant="caption"
                     component="h2"
                     align="left"
-                    style={{margin:"1em"}}
+                    style={{margin:"0.6em 0.6em 0.6em 1em", fontSize:'1rem'}}
                     color="secondary"
                 >
-                    Välkommen {"BENGT"}
+                    Hello {props.userData.username}!
                 </Typography>
             </Card>     
         </Grid>

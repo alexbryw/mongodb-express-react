@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import EntryCard from './EntryCard';
 import WelcomeEntry from './WelcomeEntry';
 
-export default class Enties extends Component {
+export default class Entries extends Component {
     constructor(props) {
         super(props)
         this.state ={
@@ -25,9 +25,10 @@ export default class Enties extends Component {
                         justify="space-between"
                         alignItems="center"
                     >
-                    {this.state.loggedIn ? <WelcomeEntry/> : ""}
+                    {this.props.userData.username? <WelcomeEntry userData={this.props.userData}/> : ""}
                     {entries.map((entry) =>
                         <EntryCard 
+                            userData={this.props.userData}
                             entryData={ entry } 
                             key={entry._id} 
                             refreshEntries={this.props.refreshEntries}
