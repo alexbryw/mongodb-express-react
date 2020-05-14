@@ -24,7 +24,7 @@ export default class Layout extends Component {
         return (
             <div style={backgroundColor}>
                 <BrowserRouter>
-                    <Header/>
+                    <Header userData={this.props.userData}/>
                     <Switch>
                         <Route exact path="/">
                             <Entries
@@ -33,7 +33,7 @@ export default class Layout extends Component {
                             />
                         </Route>
                         <Route path="/admin">
-                            <AdminPage/>
+                            <AdminPage />
                         </Route>
                         <Route path="/user">
                             <User refreshEntries={this.props.refreshEntries}/>
