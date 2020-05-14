@@ -24,8 +24,8 @@ export default class UserToggle extends React.Component  {
       return (
         <>
             {this.state.loginMode? 
-            <UserLogin/>
-            : <UserRegister/>
+            <UserLogin refreshEntries = {this.props.refreshEntries}/>
+            : <UserRegister refreshEntries = {this.props.refreshEntries}/>
             }
 
             <Button variant="contained" color="secondary" style={buttonStyle} onClick={this.enterLoginMode}>

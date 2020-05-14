@@ -29,7 +29,7 @@ router.post('/api/user', async function (req, res) {
         user.save(function (err, user) {
             if(err){//db error, duplicate name or bad password.
                 res.status(400).send(
-                {msg: err.message})
+                {msg: 'Username already taken'})
             }
             res.status(201).json(user)//201 OK created and send back new user.
         })
@@ -43,7 +43,7 @@ router.post('/api/user', async function (req, res) {
 router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
     // console.log(req.params.id)
     if(!req.body.username && !req.body.password && req.body.admin){
-        res.status(400).json(
+        res.status(400).send(
             {msg: "Pleas provide 'username' or 'password' or 'admin' to update."})
         return
     }

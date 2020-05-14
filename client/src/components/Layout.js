@@ -36,7 +36,7 @@ export default class Layout extends Component {
                             <AdminPage/>
                         </Route>
                         <Route path="/user">
-                            <User/>
+                            <User refreshEntries={this.props.refreshEntries}/>
                         </Route>
                         <Route path="/addentry">
                             <AddEntry refreshEntries={this.props.refreshEntries}/>

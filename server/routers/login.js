@@ -6,7 +6,7 @@ const userRoute = require('../models/User.model')
 //Login.
 router.post('/api/user/login', async function (req, res) {
     if(!req.body.username || !req.body.password){
-        res.status(400).json({msg:"Username or password is missing."})
+        res.status(400).send({msg:"Username or password is missing."})
         return
     }
 

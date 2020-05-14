@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import UserToggle from './UserToggle'
 
 
-export default function User() {
+export default function User(props) {
     let entryWidth = {   
         width:'95vw',
     }
@@ -23,7 +23,7 @@ export default function User() {
   return (
     <Container style={entryWidth}>
         <Card style={cardStyle}>
-            <UserToggle/>
+            <UserToggle refreshEntries={props.refreshEntries}/>
         </Card>
     </Container>
   );
