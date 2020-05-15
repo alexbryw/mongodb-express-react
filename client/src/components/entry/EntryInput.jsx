@@ -124,13 +124,13 @@ export default class EntryInput extends React.Component{
                 <form style = {{width: '100%'}}>          
                     <TextField
                         variant="outlined"
-                        required label="Title, max 30 characters" 
+                        required label="Title, max 15 characters" 
                         color="secondary"
                         style={textfieldStyle}
                         error = {this.state.isTitleError}
                         onChange = {this.selectedTitleHandler}
                         helperText = {this.state.titleErrorText}
-                        inputProps = {{maxLength: 30}}
+                        inputProps = {{maxLength: 20}}
                     />
                     <input 
                         required accept="image/png, image/jpeg" 
