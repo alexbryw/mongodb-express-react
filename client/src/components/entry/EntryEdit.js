@@ -34,7 +34,7 @@ export default function EntryEdit(props) {
                     justify="space-between"
                     alignItems="center"
                 >   
-                    <IconButton color="secondary" size="small">
+                    <IconButton color="secondary" size="small" onClick={props.editModeClick}>
                         <ArrowBackIcon />
                     </IconButton>
                 </Grid>
