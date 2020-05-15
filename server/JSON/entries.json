@@ -1,0 +1,26 @@
+[
+    {
+        "_id" : "5ebe885bea169a444b50a95a",
+        "username" : "admin",
+        "title" : "Bananer",
+        "image" : "uploads/1589545051664banan2.jpg",
+        "text" : "Wow, bananer",
+        "__v" : 0
+    },
+    {
+        "_id" : "5ebe8870ea169a444b50a95b",
+        "username" : "admin",
+        "title" : "Fina BANANER!!!",
+        "image" : "uploads/1589545072065banana1.jpg",
+        "text" : "Ojojojojjo",
+        "__v" : 0
+    },
+    {
+        "_id" : "5ebe8911ea169a444b50a95e",
+        "username" : "password",
+        "title" : "Jösses, vilken banan",
+        "image" : "uploads/1589545233275banan.png",
+        "text" : "Daaaamn, that a fine banana",
+        "__v" : 0
+    }
+]

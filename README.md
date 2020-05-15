@@ -41,16 +41,21 @@ Then:
 
 A nodemon server will start an express api server on http://localhost:9000
 
+4. Move the images(.jpg/.png) in server/JSON to server/uploads
+
 ---------------
 
 ### A default user to use for testing purposes:
 
 Log in with:
 
+default-admin user
 username: admin
-
 password: admin
 
+default-nonAdmin user
+username: password
+password: password
 
 # Creators
 - [Alexander Bryngelsson](https://github.com/alexbryw)

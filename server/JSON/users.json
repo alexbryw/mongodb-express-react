@@ -1,0 +1,23 @@
+[
+    {
+        "_id" : "5eb901942ab6c386a3f41c32",
+        "username" : "admin",
+        "password" : "$2b$10$0gkAuwt08DLwV69pAI5zlunQm/Ah6ZBROGcPfzLsUpGJ9jePHV6qG",
+        "admin" : true,
+        "__v" : 0
+    },
+    {
+        "_id" : "5ebe63df7630fc3f5cd3953f",
+        "username" : "Leffe Lök",
+        "password" : "$2b$10$HwYbX7umcU3dcWsoNnAMk.3eR9osULUpYgWwSV9Lh4/rvp4mkjBOS",
+        "admin" : false,
+        "__v" : 0
+    },
+    {
+        "_id" : "5ebe88e5ea169a444b50a95d",
+        "username" : "password",
+        "password" : "$2b$10$m59bLTlSMU.YY2LYZQ5L8OFs/UtGZxhRzersR0.boRGBSOl6Q5Qmi",
+        "admin" : false,
+        "__v" : 0
+    }
+]
