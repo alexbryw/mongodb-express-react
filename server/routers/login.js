@@ -7,7 +7,7 @@ const userRoute = require('../models/User.model')
 //Check if user is logged in.
 router.get('/api/user/login', async function (req, res) {
     if(!req.session.username){
-        res.json({msg:"User not logged in."})
+        // res.status(401).json({msg:"User not logged in."})//Fix client to handle 401 status.(Next version.)
         return
     } else {
         const userFound = await userRoute.findOne({username: req.session.username})
