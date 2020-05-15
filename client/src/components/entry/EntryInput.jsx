@@ -96,6 +96,7 @@ export default class EntryInput extends React.Component{
                     })
                 }
                 else{
+                    //Yes, this was somehow necessary
                     this.props.refreshEntries()
                     this.props.refreshEntries()
                     this.setState({

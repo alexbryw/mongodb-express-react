@@ -14,7 +14,7 @@ export default class Entries extends Component {
     render() {
         const entries = this.props.entryData.entries;
         if(typeof entries === "function"){
-            // Loading div, might need something nicer
+            // Loading div, might need something nicer in the future
             return (<div></div>)
         } else {
             entries.reverse()
@@ -26,6 +26,7 @@ export default class Entries extends Component {
                         justify="space-between"
                         alignItems="center"
                     >
+                    {/*Only shows when you are logged in*/}
                     {this.props.userData.username? <WelcomeEntry userData={this.props.userData}/> : ""}
                     {entries.map((entry) =>
                         <EntryCard 

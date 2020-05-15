@@ -21,15 +21,11 @@ export default class EntryAlter extends React.Component{
             text: event.target.value	
         })	
     }	
-    //WILL NEED A ONCHANGE FOR USER	
-    entryUploadHandler = () => {	
 
+    entryUploadHandler = () => {	
         let updatedEntry	
 
         if((this.state.title === "")){	
-/*             this.setState({	
-                isTitleError: true	
-            }) */
             this.setState({	
                 titleErrorText: "Need title"	
             })		
@@ -55,6 +51,7 @@ export default class EntryAlter extends React.Component{
                 .catch(error => console.error('Error:', error))	
                 .then(response => console.log('Success:', JSON.stringify(response)))
                 .then(
+                    //Yes, this was somehow necessary
                     this.props.refreshEntries(),
                     this.props.refreshEntries(),
                     this.props.editMode()
