@@ -128,7 +128,7 @@ router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (
 })
 
 //Update entry.
-router.put('/api/entry/:id',secureRouteUserOrAdmin, upload.single('image'), async (req, res) => {
+router.put('/api/entry/:id',secureRouteUserOrAdmin, async (req, res) => {
 
     try{
         const id = req.params.id
@@ -139,9 +139,9 @@ router.put('/api/entry/:id',secureRouteUserOrAdmin, upload.single('image'), asyn
             new: {
                 _id: req.params.id,
                 username: req.params.username,
-                title: entry.title,
+                title: req.body.title,
                 image: entry.image,
-                text: entry.text
+                text: req.body.text
             }
         })
     } catch(err){
