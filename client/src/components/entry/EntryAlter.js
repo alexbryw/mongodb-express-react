@@ -8,6 +8,7 @@ export default class EntryAlter extends React.Component{
             title: this.props.entryData.title,	
             text: this.props.entryData.text,
             isTitleError: false,
+            titleErrorText: ""
         }	
     }	
     selectedTitleHandler = event => {	
@@ -23,35 +24,46 @@ export default class EntryAlter extends React.Component{
     }	
     //WILL NEED A ONCHANGE FOR USER	
     entryUploadHandler = () => {	
-            if((this.state.title === "")){	
-                if(this.state.title === ""){	
-                    this.setState({	
-                        isTitleError: true	
-                    })	
-                }	
-            }	
-            let updatedEntry = {	
+
+        let updatedEntry	
+
+        if((this.state.title === "")){	
+/*             this.setState({	
+                isTitleError: true	
+            }) */
+            this.setState({	
+                titleErrorText: "Need title"	
+            })		
+        }
+        else {
+
+            updatedEntry = {	
                 title: this.state.title,	
                 text: this.state.text,	
                 image: this.props.entryData.image	
-            }	
-        	
-            fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{	
-                method: 'PUT',	
-                headers: {	
-                    "Content-Type" : "application/json"	
-                },
-                credentials: 'include',
-                body: JSON.stringify(updatedEntry)	
-            })	
-            .then(response => response.json())	
-            .catch(error => console.error('Error:', error))	
-            .then(response => console.log('Success:', JSON.stringify(response)))
-            .then(
-                this.props.refreshEntries(),
-                this.props.refreshEntries(),
-                this.props.editMode()
-        )	
+            }
+            console.log(this.state.isTitleError)
+            if(!this.state.isTitleError){
+                fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{	
+                    method: 'PUT',	
+                    headers: {	
+                        "Content-Type" : "application/json"	
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(updatedEntry)	
+                })	
+                .then(response => response.json())	
+                .catch(error => console.error('Error:', error))	
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .then(
+                    this.props.refreshEntries(),
+                    this.props.refreshEntries(),
+                    this.props.editMode()
+                )	
+    
+            }
+        }
+        
     }	
     render(){	
         const entryAlterStyle = {	
@@ -73,7 +85,9 @@ export default class EntryAlter extends React.Component{
                     defaultValue={this.props.entryData.title}	
                     variant="outlined" 	
                     fullWidth
-                    error={this.state.isTitleError}
+                    inputProps = {{maxLength: 20}}
+                    error = {this.state.titleErrorText? true:false}
+                    helperText = {this.state.titleErrorText}                  
                     />	
                 <img style={entryImage} src={image} alt={this.props.entryData.title + " image"}></img>	
                 <TextField	
