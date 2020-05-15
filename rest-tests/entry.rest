@@ -26,15 +26,16 @@ This is a default picture of a none default dog
 
 ###
 
-PUT http://localhost:9000/api/entry/5ebc5164fbd2ac38446c09c9
+#Image path has to be the same as the old image path otherwise the image path will be broken.
+PUT http://localhost:9000/api/entry/5ebe885bea169a444b50a95a
 Content-Type: application/json
 
 {
-    "title": "Matrix",
-    "image": "uploads\\1589399908674matrixcss.jpg",
-    "text": "I know Everything"
+    "title": "Nya Bananer",
+    "image": "uploads/1589545051664banan2.jpg",
+    "text": "Jag älskar bananer"
 }
 
 ###
 
-DELETE http://localhost:9000/api/entry/5ebbb3021f21dd1dc0d80b6d
+DELETE http://localhost:9000/api/entry/5ebe8911ea169a444b50a95e

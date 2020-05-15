@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # exclude everything in folder
-server/uploads/*
+# server/uploads/*
 
 # exception to the rule
-!server/uploads/.gitkeep 
+# server/uploads/.gitkeep 

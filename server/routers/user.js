@@ -34,15 +34,12 @@ router.post('/api/user', async function (req, res) {
             res.status(201).json(user)//201 OK created and send back new user.
         })
     } catch (error) { //Other errors.
-        console.log(error)
         res.status(400).send({msg: "Error creating a new user"})
     }
 })
 
-//Admin can update a user.
+//Admin can update a user. (Only admin status update for this assignment)
 router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
-    console.log(req.body.admin)
-    console.log(" from put admin")
     if(req.body.admin == null){
         res.status(400).send(
             {msg: "Provide 'admin' status to update."})
@@ -80,7 +77,6 @@ function secureRoute(role){
             res.status(401).json({msg: "Access denied. Please login with the correct access privileges"})
             return
         }
-        console.log(" Correct user role , access granted.")
         next()
     }
 }

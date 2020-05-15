@@ -43,14 +43,20 @@ A nodemon server will start an express api server on http://localhost:9000
 
 ---------------
 
+4. During testing, images should be ignored locally. Add the two last outcommented parts in other cases. 
+
 ### A default user to use for testing purposes:
+Database path we used: 'mongodb://localhost/lab3'
 
 Log in with:
 
+default-admin user
 username: admin
-
 password: admin
 
+default-nonAdmin user
+username: password
+password: password
 
 # Creators
 - [Alexander Bryngelsson](https://github.com/alexbryw)

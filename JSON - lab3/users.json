@@ -1,0 +1,23 @@
+[
+    {
+        "_id" : ObjectId("5ebe923a28db654ba6075dfa"),
+        "username" : "admin",
+        "password" : "$2b$10$mC/FvR6kQgsnUvQX64jy7OTLac6IU8l0sVYJzSrpycL7kRu2.XYqm",
+        "admin" : true,
+        "__v" : 0
+    },
+    {
+        "_id" : ObjectId("5ebe923a28db654ba6075dfb"),
+        "username" : "password",
+        "password" : "$2b$10$/Y1LFf04qIgIrQJVkOtP6uBBXofgZdDjk/Wiu2JRplClvk43xmymi",
+        "admin" : false,
+        "__v" : 0
+    },
+    {
+        "_id" : ObjectId("5ebe923a28db654ba6075dfc"),
+        "username" : "K3nn3tt123",
+        "password" : "$2b$10$y2YkVJM69gDManD2.shT.O/MGMNCg80gM1w0eaht2/.alh86563x6",
+        "admin" : false,
+        "__v" : 0
+    }
+]

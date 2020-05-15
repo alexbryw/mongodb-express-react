@@ -7,7 +7,7 @@ const userRoute = require('../models/User.model')
 //Check if user is logged in.
 router.get('/api/user/login', async function (req, res) {
     if(!req.session.username){
-        res.status(401).send({msg:"User not logged in."})
+        res.json({msg:"User not logged in."})
         return
     } else {
         const userFound = await userRoute.findOne({username: req.session.username})
@@ -29,8 +29,6 @@ router.post('/api/user/login', async function (req, res) {
 
     const userFound = await userRoute.findOne({username: req.body.username})
     if(userFound) {
-        console.log(req.session.sessionKey)
-        console.log(req.session.username)
         if(req.session.username != null){
             return res.status(400).json({msg:"User already logged in."})
         }
