@@ -70,7 +70,8 @@ export default class EntryInput extends React.Component{
 
     handleEntryUpload = () => {
         const err = this.validateInput()
-
+        
+        //Post new entry
         if(!err){
             const fd = new FormData()
             fd.append('username', this.props.userData)
@@ -96,13 +97,13 @@ export default class EntryInput extends React.Component{
                     })
                 }
                 else{
+                    //Yes, this was somehow necessary
                     this.props.refreshEntries()
                     this.props.refreshEntries()
                     this.setState({
                     redirect:true
                     })
                 }
-                console.log(JSON.stringify(response))
             })                      
         }
     }

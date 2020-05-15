@@ -106,7 +106,7 @@ export default class UserLogin extends React.Component{
                     <form>
                         <TextField
                             required
-                            label="User"
+                            label="Username"
                             defaultValue=""
                             variant="outlined"
                             fullWidth

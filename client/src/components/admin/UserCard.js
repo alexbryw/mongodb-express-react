@@ -21,13 +21,14 @@ export default class UserCard extends React.Component{
         }
     }
 
-
+    // Admin deletes User 
     handleDelete = () => {
         fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,{method:'DELETE', credentials: "include"})
         .catch(error => console.error('Error:', error))
         .then(this.setState({deleted: !this.state.deleted})) 
     }
 
+    // Turns a Admin into a User 
     handleAdmin = () => {
         let data = JSON.stringify({admin: !this.state.admin})
         fetch(`http://localhost:9000/api/user/${this.props.userData._id}`,
@@ -43,16 +44,14 @@ export default class UserCard extends React.Component{
         .catch(error => console.error('Error:', error))
         .then(this.setState({admin: !this.state.admin}))
     }
-
+    
     async getCurrentUser(){
         const response = await fetch('http://localhost:9000/api/user/login', {method: 'GET',credentials: 'include'})
         const currentUser = await response.json()
         if(currentUser.username != null){
             this.setState({currentUsername: currentUser.username})
-            // console.log(currentUser)
         } else {
             this.setState({currentUsername: ""})
-            // console.log(currentUser)
         }
 
     }
@@ -68,6 +67,7 @@ export default class UserCard extends React.Component{
         }
 
         if(this.state.deleted){
+            // Hides deleted User
             return(<></>)
         } else {
             return(
@@ -94,20 +94,6 @@ export default class UserCard extends React.Component{
                         </div>
                         {this.props.userData.username === "admin" || this.state.currentUsername === this.props.userData.username ?
                         <div>
-                            {/* <Button 
-                                variant="outlined" 
-                                size="small" 
-                                color="grey" // gråa ut knapparna ?
-                                
-                                >
-                                {this.state.admin? 
-                                    "Unadminify"
-                                    :"Adminify"
-                                }
-                                </Button>
-                                <IconButton color="grey">
-                                <DeleteForever/>
-                            </IconButton> */}
                         </div>
                         :
                         <div>

@@ -15,22 +15,17 @@ export default class EntryAlter extends React.Component{
         this.setState({	
             title: event.target.value	
         })	
-        console.log(this.state.title)	
     }	
     selectedTextHandler = event => {	
         this.setState({	
             text: event.target.value	
         })	
     }	
-    //WILL NEED A ONCHANGE FOR USER	
-    entryUploadHandler = () => {	
 
+    entryUploadHandler = () => {	
         let updatedEntry	
 
         if((this.state.title === "")){	
-/*             this.setState({	
-                isTitleError: true	
-            }) */
             this.setState({	
                 titleErrorText: "Need title"	
             })		
@@ -42,8 +37,8 @@ export default class EntryAlter extends React.Component{
                 text: this.state.text,	
                 image: this.props.entryData.image	
             }
-            console.log(this.state.isTitleError)
             if(!this.state.isTitleError){
+                //Uploads altered entrys
                 fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{	
                     method: 'PUT',	
                     headers: {	
@@ -56,6 +51,7 @@ export default class EntryAlter extends React.Component{
                 .catch(error => console.error('Error:', error))	
                 .then(response => console.log('Success:', JSON.stringify(response)))
                 .then(
+                    //Yes, this was somehow necessary
                     this.props.refreshEntries(),
                     this.props.refreshEntries(),
                     this.props.editMode()

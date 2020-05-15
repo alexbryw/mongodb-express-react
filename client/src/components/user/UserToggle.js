@@ -11,7 +11,7 @@ export default class UserToggle extends React.Component  {
             loginMode: true
         }
     }
-
+    // Toggles between adding a user an login
     enterLoginMode = () => { 
         this.setState({loginMode: !this.state.loginMode})
     }
