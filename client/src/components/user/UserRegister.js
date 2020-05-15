@@ -55,14 +55,52 @@ export default class UserRegister extends React.Component{
                 })
             }
             else{
+/*                 this.props.refreshEntries()
+                this.props.refreshEntries() */
+                this.sendLogInRequest()
+/*                 this.setState({
+                redirect:true
+                }) */
+            }
+            console.log(JSON.stringify(response))
+        })
+    }
+
+    sendLogInRequest = () => {
+        let data = {
+            "username": this.state.username,
+            "password": this.state.password
+        }
+        fetch(`http://localhost:9000/api/user/login`,{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                "Content-Type" : "application/json"
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .catch(err => {
+            if(err.response) { 
+                console.log(err)
+            }
+        })
+         .then((response) => {
+            if(response.msg){
+                this.setState({
+                    errorMessage: response.msg
+                })
+            }
+            else{
                 this.props.refreshEntries()
                 this.props.refreshEntries()
                 this.setState({
                 redirect:true
                 })
             }
-            console.log(JSON.stringify(response))
-        })
+            this.props.refreshUser()
+        }) 
     }
 
     renderRedirect = () => {
