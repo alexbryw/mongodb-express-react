@@ -14,15 +14,23 @@ addDefaultUsers()
 
 //Default admin user with password: 'admin' added to db.
 async function addDefaultUsers(){
-    const cryptPassword = await bcrypt.hash("admin", 10)
-    const userFound = await userModel.findOne({username: "admin"})
+    addUser("admin","admin",true)
+    addUser("Leif","123456",false)
+    addUser("Roger","123456",true)
+
+}
+
+//Input string username, string password, boolean isAdmin.
+async function addUser(username, password, isAdmin){
+    const cryptPassword = await bcrypt.hash(password, 10)
+    const userFound = await userModel.findOne({username: username})
     if(!userFound){
-        const user = new userModel({username: "admin", password: cryptPassword, admin: true})
+        const user = new userModel({username: username, password: cryptPassword, admin: isAdmin})
         user.save(function (err, user){
             if(err) return console.log(err.message)
-            console.log("Default user admin added to database.")
+            console.log("Default user " + username +" added to database.")
         })
     } else {
-        // console.log("User 'admin' is in database.")
+        // console.log("Default user " + username + " is in database.")
     }
 }
