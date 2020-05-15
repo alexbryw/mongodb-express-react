@@ -2,12 +2,8 @@ import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ControlPointIcon from '@material-ui/icons/ControlPoint';
-import TextFormatIcon from '@material-ui/icons/TextFormat';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom';
+import HeaderButton from './HeaderButtons';
 
 export default function Header(props) {
     let headerSize = {   
@@ -20,21 +16,6 @@ export default function Header(props) {
         headerSize = {
             width:'35em', 
         }
-    }
-    let loggedIn
-    if (Object.entries(props.userData).length === 0){
-        loggedIn = false
-    } else {
-        loggedIn = true
-    }
-
-    function handleLogOut(){
-
-        fetch(`http://localhost:9000/api/user/logout`, 
-        {method:'DELETE',credentials: 'include'})
-        .then(
-            setTimeout(function(){ props.refreshUser() }, 3000)
-        )
     }
 
     return (
@@ -49,44 +30,7 @@ export default function Header(props) {
             <Link to="/">
                 <img src={require('../assets/logo.png')} alt="logo" style={{height:"2em", paddingRight:"1em"}}/>
             </Link>
-            <div>
-                {props.userData.admin?      
-                    (
-                        <Link to="/admin">
-                            <IconButton color="primary">
-                            <TextFormatIcon />
-                            </IconButton>
-                        </Link>    
-                    )
-                    :("")
-                }
-                {
-                    loggedIn?
-                    (
-                        <Link to="/addentry">
-                            <IconButton color="primary">
-                                <ControlPointIcon />
-                            </IconButton>
-                        </Link>
-                    ) : ("")
-                }
-
-                {
-                    loggedIn?
-                    (
-                        <IconButton color="primary" onClick={handleLogOut}>
-                            <ExitToAppIcon />
-                        </IconButton>
-                    ):(
-                        <Link to="/user">
-                            <IconButton color="primary">
-                                <AccountCircleIcon />
-                            </IconButton>
-                        </Link>
-                    )
-                }
-
-            </div>
+            <HeaderButton userData={props.userData} refreshUser={props.refreshUser}/>
             </Grid>
         </Container>
     )
