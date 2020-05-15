@@ -5,23 +5,38 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom';
+import {Redirect} from 'react-router-dom'
 
 export default class HeaderButton extends React.Component{
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            redirect:false
+        }
     }
-    handleLogOut(){
+    handleLogOut = () => {
 
         fetch(`http://localhost:9000/api/user/logout`, 
         {method:'DELETE',credentials: 'include'})
         .then(
-            this.props.refreshUser()
+            this.props.refreshUser(),
+            this.setState({
+                redirect:true
+            })
         )
     }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
+    }
+
     render(){
 
         return (
+            <>
+            {this.renderRedirect()}
                 <div>
                     {this.props.userData.admin?      
                         (
@@ -60,6 +75,7 @@ export default class HeaderButton extends React.Component{
                     }
     
                 </div>
+            </>
         )
     }
 }
