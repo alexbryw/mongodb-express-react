@@ -19,7 +19,7 @@ export default class HeaderButton extends React.Component{
         fetch(`http://localhost:9000/api/user/logout`, 
         {method:'DELETE',credentials: 'include'})
         .then(
-            //Ensures that cookies is deleted
+            //Ensures that cookies is deleted before it refreshes 
             setTimeout(this.props.refreshUser,0),
             this.setState({
                 redirect:true
@@ -34,7 +34,6 @@ export default class HeaderButton extends React.Component{
     }
 
     render(){
-
         return (
             <>
             {this.renderRedirect()}
@@ -49,7 +48,9 @@ export default class HeaderButton extends React.Component{
                         )
                         :("")
                     }
-                    {
+                    {  
+                         /* Checks if the object is empty === no logged in user*/
+                        /* Give "not logged in" - mode*/
                         (Object.entries(this.props.userData).length !== 0)?
                         (
                             <Link to="/addentry">
@@ -61,6 +62,8 @@ export default class HeaderButton extends React.Component{
                     }
     
                     {
+                        /* Checks if the object is empty === no logged in user*/
+                        /* Give "not logged in" - mode*/
                         (Object.entries(this.props.userData).length !== 0)?
                         (
                             <IconButton color="primary" onClick={this.handleLogOut}>
@@ -74,7 +77,6 @@ export default class HeaderButton extends React.Component{
                             </Link>
                         )
                     }
-    
                 </div>
             </>
         )

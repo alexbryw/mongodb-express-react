@@ -61,7 +61,6 @@ export default class UserRegister extends React.Component{
                 redirect:true
                 })
             }
-            console.log(JSON.stringify(response))
         })
     }
 

@@ -102,7 +102,6 @@ export default class EntryInput extends React.Component{
                     redirect:true
                     })
                 }
-                console.log(JSON.stringify(response))
             })                      
         }
     }

@@ -14,7 +14,6 @@ export default class EntryAlter extends React.Component{
         this.setState({	
             title: event.target.value	
         })	
-        console.log(this.state.title)	
     }	
     selectedTextHandler = event => {	
         this.setState({	

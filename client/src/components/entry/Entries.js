@@ -14,7 +14,8 @@ export default class Entries extends Component {
     render() {
         const entries = this.props.entryData.entries;
         if(typeof entries === "function"){
-            return (<div></div>) //nicer loading here
+            // Loading div, might need something nicer
+            return (<div></div>)
         } else {
             entries.reverse()
             return (

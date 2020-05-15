@@ -45,7 +45,7 @@ export default function AdminPage() {
                 Admin Page
             </Typography>
             <div>
-                
+                {/*Needed for the right look*/ }
             </div>
             </Grid>
             <UserList/>
