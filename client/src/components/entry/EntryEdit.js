@@ -14,10 +14,11 @@ export default function EntryEdit(props) {
         marginBottom: "1em"
     }
 
+    //Deletes entry
     function handleDelete(){
         fetch(`http://localhost:9000/api/entry/${props.entryData._id}`, 
             {method:'DELETE',credentials: 'include'}).then(
-                //Yes, this was somehow necessary
+                //Yes, this was somehow necessary,
                 props.refreshEntries(),
                 props.refreshEntries(),
                 props.refreshEntries()

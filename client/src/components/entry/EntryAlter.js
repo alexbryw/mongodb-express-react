@@ -37,8 +37,8 @@ export default class EntryAlter extends React.Component{
                 text: this.state.text,	
                 image: this.props.entryData.image	
             }
-            console.log(this.state.isTitleError)
             if(!this.state.isTitleError){
+                //Uploads altered entrys
                 fetch(`http://localhost:9000/api/entry/${this.props.entryData._id}`,{	
                     method: 'PUT',	
                     headers: {	

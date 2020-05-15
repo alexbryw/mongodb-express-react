@@ -15,6 +15,7 @@ class App extends React.Component {
     }
   }
 
+  // Gets all entries when mounted
   async callAPI(){
     fetch("http://localhost:9000/api/entry/")
     .then((response) => { return response.json()})
@@ -22,6 +23,7 @@ class App extends React.Component {
     .catch(error => console.error('Error:', error))
   }
 
+  // Gets the user (if any) when mounted
   async callUserAPI(){
       fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
       .then((response) => { return response.json()})

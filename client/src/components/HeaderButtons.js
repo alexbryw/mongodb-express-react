@@ -15,7 +15,7 @@ export default class HeaderButton extends React.Component{
         }
     }
     handleLogOut = () => {
-
+        //Log out user
         fetch(`http://localhost:9000/api/user/logout`, 
         {method:'DELETE',credentials: 'include'})
         .then(

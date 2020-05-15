@@ -70,7 +70,8 @@ export default class EntryInput extends React.Component{
 
     handleEntryUpload = () => {
         const err = this.validateInput()
-
+        
+        //Post new entry
         if(!err){
             const fd = new FormData()
             fd.append('username', this.props.userData)
