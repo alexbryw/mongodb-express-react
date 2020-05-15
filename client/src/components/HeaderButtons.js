@@ -19,7 +19,8 @@ export default class HeaderButton extends React.Component{
         fetch(`http://localhost:9000/api/user/logout`, 
         {method:'DELETE',credentials: 'include'})
         .then(
-            this.props.refreshUser(),
+            //Ensures that cookies is deleted
+            setTimeout(this.props.refreshUser,0),
             this.setState({
                 redirect:true
             })
