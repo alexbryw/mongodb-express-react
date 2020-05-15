@@ -1,6 +1,6 @@
 [
     {
-        "_id" : "5ebe885bea169a444b50a95a",
+        "_id" : ObjectId("5ebe885bea169a444b50a95a"),
         "username" : "admin",
         "title" : "Bananer",
         "image" : "uploads/1589545051664banan2.jpg",
@@ -8,7 +8,7 @@
         "__v" : 0
     },
     {
-        "_id" : "5ebe8870ea169a444b50a95b",
+        "_id" : ObjectId("5ebe8870ea169a444b50a95b"),
         "username" : "admin",
         "title" : "Fina BANANER!!!",
         "image" : "uploads/1589545072065banana1.jpg",
@@ -16,7 +16,7 @@
         "__v" : 0
     },
     {
-        "_id" : "5ebe8911ea169a444b50a95e",
+        "_id" : ObjectId("5ebe8911ea169a444b50a95e"),
         "username" : "password",
         "title" : "Jösses, vilken banan",
         "image" : "uploads/1589545233275banan.png",

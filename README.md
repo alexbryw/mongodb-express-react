@@ -41,11 +41,12 @@ Then:
 
 A nodemon server will start an express api server on http://localhost:9000
 
-4. Move the images(.jpg/.png) in server/JSON to server/uploads
-
 ---------------
 
+4. During testing, images should be ignored locally. Add the two last outcommented parts in other cases. 
+
 ### A default user to use for testing purposes:
+Database path we used: 'mongodb://localhost/lab3'
 
 Log in with:
 
