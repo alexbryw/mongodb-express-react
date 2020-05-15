@@ -2,9 +2,8 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const mongoose = require("mongoose");
-let Entry = require('../models/Entry.model')
-const imageUrl = require('../models/Entry.model')
 const multer = require('multer')
+let Entry = require('../models/Entry.model')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,7 +20,7 @@ const fileFilter = (req, file, cb) => {
         cb(null, true)
     } else {
         //reject file
-        cb(new Error('To big or wrong format'), false)
+        cb(new Error('Wrong format'), false)
     }
 }
 
@@ -30,9 +29,8 @@ const upload = multer({
     fileFilter: fileFilter
     })
 
-//Get all entries.
+//GET all entries.
 router.get('/api/entry', (req, res, next) => {
-    //res.json({msg:"from GET /api/entry"})
     Entry.find()
     .select('_id username title text image')
     .exec()
@@ -63,7 +61,7 @@ router.get('/api/entry', (req, res, next) => {
     })
 })
 
-//Get entry by id
+//GET entry by id
 
 router.get('/api/entry/:id', (req, res, next) => {
     const id = req.params.id
@@ -72,7 +70,6 @@ router.get('/api/entry/:id', (req, res, next) => {
     .select('username title text _id image')
     .exec()
     .then(doc => {
-        console.log('From database: ', doc)
         if(doc) {
             res.status(200).json({
                 entry: doc,
@@ -92,9 +89,8 @@ router.get('/api/entry/:id', (req, res, next) => {
 })
 
 
-//Add entry.
+//ADD entry.
 router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (req, res, next) {
-    console.log(req.session.username, " from POST entry.")
     const entry = new Entry({
         _id: new  mongoose.Types.ObjectId(),
         username: req.session.username, //Changed to cookie username of logged in user.
@@ -104,7 +100,6 @@ router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (
     })
     entry.save()
     .then(result => {
-        console.log(result)
         res.status(201).json({
             createdEntry: {
                 _id: result._id,
@@ -127,7 +122,7 @@ router.post('/api/entry', secureRouteAnyUser, upload.single('image'), function (
 
 })
 
-//Update entry.
+//PUT entry.
 router.put('/api/entry/:id',secureRouteUserOrAdmin, async (req, res) => {
 
     try{
@@ -152,7 +147,7 @@ router.put('/api/entry/:id',secureRouteUserOrAdmin, async (req, res) => {
     }
 })
 
-//Delete entry.
+//DELETE entry.
 router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
     try{
         const id = req.params.id
@@ -180,10 +175,6 @@ router.delete('/api/entry/:id', secureRouteUserOrAdmin, async (req, res) => {
 })
 
 function secureRouteUserOrAdmin(req, res, next){
-    // console.log(req.params.id)
-    // console.log(req.session.username, " username")
-    // console.log(req.session.role , " role")
-    // console.log("from secure route user or admin entry")
     if(!req.session.username){
         return res.status(401).json({msg: "Login to continue."})
     }
@@ -193,9 +184,7 @@ function secureRouteUserOrAdmin(req, res, next){
 
         if(entry){
             if(entry.username === req.session.username || req.session.role === "admin"){
-                console.log("Pass - ")
                 next()
-                // res.status(404).json({msg: "test pass"})
             } else {
                 res.status(401).json({msg: "Wrong user - login with correct user or admin account."})
             }
@@ -203,25 +192,17 @@ function secureRouteUserOrAdmin(req, res, next){
             res.status(404).json({msg: "Could not find entry."})
         }
     })
-
 }
 
 function secureRouteAnyUser(req, res, next){
     if(!req.session.username){
-        console.log("username not found in cookie.")
         return res.status(401).json({msg: "Login to continue."})
     }
-    // console.log(req.body.username," req.body.username") // empty body? no username?
-    // console.log(req.session.username, " session cookie username")
     if(req.session.username || req.session.role === "admin"){
-        console.log("Pass - username found " , req.session.username)
         next()
     } else {
         res.status(401).json({msg: "Wrong user - log in with correct user or admin."})
     }
-
-
 }
-
 
 module.exports = router

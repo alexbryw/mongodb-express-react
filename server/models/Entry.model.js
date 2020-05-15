@@ -22,11 +22,6 @@ const entrySchema = new Schema({
         maxlength: 140
     }
 })
-/* 
-const imageUrl = entrySchema.virtual('imageUrl')
-imageUrl.get(function(value, virtual, doc){
-    return 'http://localhost:9000/' + doc.image
-}) */
 
 const Entry = mongoose.model('Entry', entrySchema)
 
