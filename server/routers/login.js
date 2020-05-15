@@ -7,11 +7,12 @@ const userRoute = require('../models/User.model')
 //Check if user is logged in.
 router.get('/api/user/login', async function (req, res) {
     if(!req.session.username){
-        //res.status(401).send({msg:"User not logged in."})
-        //return
+        res.status(401).send({msg:"User not logged in."})
+        return
     } else {
         const userFound = await userRoute.findOne({username: req.session.username})
         if(userFound){
+            userFound.password = ""
             res.json(userFound) //Send back user from db.
         } else {
             res.status(400).json({msg: "User not found, try clearing out old browser cookies."})
@@ -38,6 +39,7 @@ router.post('/api/user/login', async function (req, res) {
         if(passwordMatch){
             req.session.username = userFound.username
             req.session.role = userFound.admin ? "admin" : "user"
+            userFound.password = ""
             res.json(userFound)
         } else {
             res.status(400).json({msg:"Wrong password."})
@@ -50,8 +52,6 @@ router.post('/api/user/login', async function (req, res) {
 
 //Logout.
 router.delete('/api/user/logout', function (req, res) {
-    // console.log(req.session.username)
-    // console.log(req.session.role)
     if(!req.session.username){
         return res.status(400).json({msg: "User already logged out."})
     }
