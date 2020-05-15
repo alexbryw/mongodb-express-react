@@ -12,7 +12,6 @@ class App extends React.Component {
     this.state = {
       apiResponse: [],
       userData: {},
-      refresh: false
     }
   }
 
@@ -43,15 +42,34 @@ class App extends React.Component {
   }
 
   refreshUser = () => {
-    setTimeout(function(){ 
-    }, 3000);
+
+    //this.setState({userData: {}})
+
+    this.setState({userData: {}})
+    
     fetch("http://localhost:9000/api/user/login", {method: 'GET',credentials: 'include'})
     .then((response) => { return response.json()})
-    .then((data) => {this.setState({userData: data})})
+    .then((data) => {
+      console.log(data)
+      if(data.msg){
+        this.setState({userData: {}})
+      } else {
+        this.setState({userData: data})
+      }
+    })
     .catch(error => console.error('Error:', error))
+    .then(    console.log(this.state.userData)
+    )
+
+    /*if(tom användare){
+      this.setState({userData: {}})
+    }*/
+
+
   }
 
   render(){
+    console.log(this.state.userData)
     return (
       <ThemeProvider theme={Theme}>
         <div className="App">
