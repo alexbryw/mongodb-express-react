@@ -49,7 +49,6 @@ export default class EntryAlter extends React.Component{
                 })	
                 .then(response => response.json())	
                 .catch(error => console.error('Error:', error))	
-                .then(response => console.log('Success:', JSON.stringify(response)))
                 .then(
                     //Yes, this was somehow necessary
                     this.props.refreshEntries(),
