@@ -20,7 +20,6 @@ export default function EntryCard(props) {
             width:'35em',
         }
     }
-    console.log(props.entryData)
     return (
         <Grid item>
             <Card style={{...cardStyle, ...entryWidth}}>
