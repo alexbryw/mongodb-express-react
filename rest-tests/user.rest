@@ -20,17 +20,17 @@ Content-Type: application/json
 ###
 
 #Update user admin status true/false by id.
-PUT http://localhost:9000/api/user/5ebd7fa85f2d4a307807eb6e
+PUT http://localhost:9000/api/user/5ebe923a28db654ba6075dfc
 Content-Type: application/json
 
 {
-    "admin": "false"
+    "admin": "true"
 }
 
 ###
 
 #Delete user by id.
-DELETE http://localhost:9000/api/user/5eb9371009094815bc038695
+DELETE http://localhost:9000/api/user/5ebe923a28db654ba6075dfc
 
 ###
 
