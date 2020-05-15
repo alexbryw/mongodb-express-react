@@ -6,7 +6,7 @@ const User = require('../models/User.model')
 
 //Get all user to admin accounts.
 router.get('/api/user',secureRoute("admin"), async function (req, res) {
-    const users = await User.find({})
+    const users = await User.find({}).select('-password')
     if(users.length < 1){
         res.status(404).json({msg: "Users not found."})
     } else {
@@ -24,13 +24,13 @@ router.post('/api/user', async function (req, res) {
     }
 
     let user = new User({username: req.body.username, password: cryptPassword, admin: false})
-    // console.log(user)
     try {
         user.save(function (err, user) {
             if(err){//db error, duplicate name or bad password.
                 res.status(400).send(
                 {msg: 'Username already taken'})
             }
+            user.password = ""
             res.status(201).json(user)//201 OK created and send back new user.
         })
     } catch (error) { //Other errors.
@@ -52,13 +52,12 @@ router.put('/api/user/:id',secureRoute("admin"), function (req, res) {
     User.findByIdAndUpdate({_id: req.params.id}, {admin: req.body.admin}, {new: true}, function(err, user){
         if(err) return res.status(404).json({msg: "Error wrong user id format."})
         if(user){
+            user.password = ""
             res.json(user)
         } else {
             res.status(404).json({msg: "User could not be updated."})
         }
     })
-
-    //TODO return updated user and not old user info.
 })
 
 //Admin can delete a user.
@@ -66,11 +65,11 @@ router.delete('/api/user/:id',secureRoute("admin"), async function (req, res) {
     User.findByIdAndDelete({_id: req.params.id}, function(err, user){
         if(err) return res.status(404).json({msg: "Error wrong user id format."})
         if(user){
+            user.password = ""
             res.json(user)
         } else {
             res.status(404).json({msg: "User not found."})
         }
-        console.log(user)
     })
 })
 
