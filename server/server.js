@@ -13,7 +13,7 @@ const loginRoute = require('./routers/login')
 app.use(cors({ credentials: true, origin: ['http://localhost:3000']}))
 app.use(cookieSession({
     secret: 'secretKey',
-    maxAge: 1000 * 60 * 5, //5 min cookie timeout.
+    maxAge: 1000 * 60 * 10, //10 min cookie timeout.
     sameSite: 'strict',
     httpOnly: true,
     secure: false
